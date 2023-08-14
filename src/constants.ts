@@ -9,9 +9,18 @@ export const TIME_FORMAT = "H:mm";
 /** Deskpro */
 export const APP_PREFIX = "meister-task";
 
+export const ENTITY = "linkedMeisterTask";
+
+export const ACCESS_TOKEN_PATH = "oauth2/access_token";
+
 export const placeholders = {
-  //..
+  ACCESS_TOKEN: `[user[${ACCESS_TOKEN_PATH}]]`,
+  CLIENT_ID: "__client_id__",
+  CLIENT_SECRET: "__client_secret__",
 };
 
 /** MeisterTask */
-export const BASE_URL = "www.meistertask.com/api";
+export const BASE_URL = "https://www.meistertask.com/api";
+export const AUTH_URL = "https://www.mindmeister.com/oauth2";
+
+export const SCOPES = ["userinfo.email", "userinfo.profile", "meistertask"];
