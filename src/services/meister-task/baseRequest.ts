@@ -1,6 +1,6 @@
 import isEmpty from "lodash/isEmpty";
 import { proxyFetch } from "@deskpro/app-sdk";
-import { BASE_URL/*, placeholders*/ } from "../../constants";
+import { BASE_URL, placeholders} from "../../constants";
 import { getQueryParams } from "../../utils";
 import { MeisterTaskError } from "./MeisterTaskError";
 import type { Request } from "../../types";
@@ -18,11 +18,11 @@ const baseRequest: Request = async (client, {
   const baseUrl = rawUrl ? rawUrl : `${BASE_URL}${url}`;
   const params = getQueryParams(queryParams);
 
-  const requestUrl = `${baseUrl}${params}`;
+  const requestUrl = `${baseUrl}?${params}`;
   const options: RequestInit = {
     method,
     headers: {
-      // "Authorization": `Bearer ${accessTokens}`,
+      "Authorization": `Bearer ${placeholders.ACCESS_TOKEN}`,
       ...customHeaders,
     },
   };

@@ -1,3 +1,4 @@
+import get from "lodash/get";
 import { Stack } from "@deskpro/deskpro-ui";
 import { MeisterTaskError } from "../../services/meister-task";
 import { Container, ErrorBlock } from "../common";
@@ -9,14 +10,14 @@ type Props = Omit<FallbackProps, "error"> & {
 };
 
 const ErrorFallback: FC<Props> = ({error}) => {
-  const message = "There was an error!";
+  let message = "There was an error!";
   const button = null;
 
   // eslint-disable-next-line no-console
   console.error(error);
 
   if (error instanceof MeisterTaskError) {
-    //...
+    message = get(error, ["data", "error", "message"], message);
   }
 
   return (

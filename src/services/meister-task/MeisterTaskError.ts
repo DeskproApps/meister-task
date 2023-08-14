@@ -10,7 +10,7 @@ class MeisterTaskError extends Error {
   data: MeisterTaskAPIError;
 
   constructor({ status, data }: InitData) {
-    const message = "Bitbucket Api Error";
+    const message = "MeisterTask Api Error";
     super(message);
 
     this.data = data;

@@ -31,7 +31,7 @@ export type Request = <T>(
 
 /** Deskpro types */
 export type Settings = {
-  //..
+  client_id?: string,
 };
 
 export type TicketData = {
@@ -49,6 +49,6 @@ export type NavigateToChangePage = { type: "changePage", path: To };
 export type EventPayload =
   | NavigateToChangePage
   | { type: "logout" }
-  ;
+;
 
 /** Entities */
