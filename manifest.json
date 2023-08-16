@@ -2,7 +2,7 @@
   "name": "@deskpro-apps/meister-task",
   "title": "MeisterTask",
   "description": "",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scope": "agent",
   "isSingleInstall": false,
   "hasDevMode": true,
