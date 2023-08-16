@@ -1,0 +1,20 @@
+{
+  "id": 305,
+  "token": "miTp0RAo",
+  "name": "Research",
+  "notes": "### This is description\n\n* __item 1__\n* _item 2_\n* item 3\n\nand here link [This is a link](https://www.meistertask.com)\n\n---\n\nbest regards,\nilia makarov",
+  "notes_html": "<p><strong>This is description</strong></p>\n<ul>\n<li><strong>item 1</strong></li>\n<li><em>item 2</em></li>\n<li>item 3</li>\n</ul>\n\n<p>and here link <a title='' href='https://www.meistertask.com' target='' rel='noopener noreferrer'>This is a link</a></p>\n\n<hr>\n\n<p>best regards,<br>\nilia makarov</p>\n",
+  "status": 1,
+  "status_updated_at": "2023-08-14T16:13:39.381745Z",
+  "section_id": 202,
+  "section_name": "In Progress",
+  "project_id": 101,
+  "sequence": 15000.0,
+  "assigned_to_id": 107758481,
+  "assignee_name": "",
+  "tracked_time": 0,
+  "due": "2023-08-31T09:00:00.000000Z",
+  "created_at": "2023-08-11T16:51:47.653476Z",
+  "updated_at": "2023-08-14T16:13:39.381936Z",
+  "created_by": 107758481
+}

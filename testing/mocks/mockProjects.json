@@ -1,0 +1,38 @@
+[
+  {
+    "id": 101,
+    "token": "token101",
+    "name": "Project MeisterTask App",
+    "notes": "Stay agile. With this Kanban template, you can set up a virtual assembly line for your project. Track tasks from left to right as your team progresses.",
+    "status": 1,
+    "share_mode": 2,
+    "share_token": null,
+    "share_token_enabled": false,
+    "created_at": "2023-08-11T16:49:27.484354Z",
+    "updated_at": "2023-08-15T12:02:38.277769Z"
+  },
+  {
+    "id": 102,
+    "token": "token102",
+    "name": "Project PM",
+    "notes": "Plan every step of the way. This Waterfall project management template helps you structure your project into phases, visualizing each task to be completed.",
+    "status": 1,
+    "share_mode": 2,
+    "share_token": null,
+    "share_token_enabled": false,
+    "created_at": "2023-08-14T15:14:41.822649Z",
+    "updated_at": "2023-08-14T15:14:44.436318Z"
+  },
+  {
+    "id": 103,
+    "token": "token103",
+    "name": "Project: Lesson Planning",
+    "notes": "Get organized. Use this template to prepare your lesson plans. You’ll be able to focus on what you do best – teaching!",
+    "status": 1,
+    "share_mode": 2,
+    "share_token": null,
+    "share_token_enabled": false,
+    "created_at": "2023-08-14T15:16:12.882854Z",
+    "updated_at": "2023-08-14T15:16:14.429495Z"
+  }
+]

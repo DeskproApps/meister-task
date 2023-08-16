@@ -11,9 +11,9 @@ import {
 import { useLogout } from "./hooks";
 import { isNavigatePayload } from "./utils";
 import {
-  LinkPage,
   HomePage,
   LoginPage,
+  LinkTasksPage,
   LoadingAppPage,
   AdminCallbackPage,
 } from "./pages";
@@ -62,7 +62,7 @@ const App: FC = () => {
       <Routes>
         <Route path="/admin/callback" element={<AdminCallbackPage/>}/>)
         <Route path="/login" element={<LoginPage/>}/>)
-        <Route path="/link" element={<LinkPage/>}/>)
+        <Route path="/link" element={<LinkTasksPage/>}/>)
         <Route path="/home" element={<HomePage/>}/>)
         <Route index element={<LoadingAppPage/>} />
       </Routes>

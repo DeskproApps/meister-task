@@ -1,0 +1,10 @@
+{
+  "id": 101,
+  "firstname": "ilia",
+  "lastname": "makarov",
+  "email": "ilia.makarov@me.com",
+  "avatar": "https://test.com/files/avatars/7996/8901/original/avatar.jpeg",
+  "avatar_thumb": "https://test.com/files/avatars/7996/8901/medium/avatar.jpeg",
+  "created_at": "2023-08-11T16:46:37.000000Z",
+  "updated_at": "2023-08-11T16:46:37.000000Z"
+}
