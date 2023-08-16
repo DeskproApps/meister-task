@@ -22,5 +22,6 @@ export const placeholders = {
 /** MeisterTask */
 export const BASE_URL = "https://www.meistertask.com/api";
 export const AUTH_URL = "https://www.mindmeister.com/oauth2";
+export const HTML_URL = "https://www.meistertask.com/app";
 
 export const SCOPES = ["userinfo.email", "userinfo.profile", "meistertask"];
