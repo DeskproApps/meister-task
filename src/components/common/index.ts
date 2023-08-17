@@ -10,3 +10,4 @@ export { Link, LinkIcon } from "./Link";
 export { DeskproTickets } from "./DeskproTickets";
 export { TextWithLink } from "./TextWithLink";
 export { Status } from "./Status";
+export { MeisterTaskLogo } from "./MeisterTaskLogo";
