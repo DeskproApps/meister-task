@@ -1,5 +1,6 @@
 import take from "lodash/take";
 import { cleanup, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { render, mockTasks, mockProjects } from "../../../../testing";
 import { Home } from "../Home";
 
@@ -18,6 +19,7 @@ describe("Home", () => {
       <Home
         tasks={take(mockTasks, 5) as never[]}
         projects={mockProjects as never}
+        onNavigateToTask={jest.fn()}
       />
     ), { wrappers: { theme: true } });
 
@@ -36,6 +38,7 @@ describe("Home", () => {
       <Home
         tasks={{} as never[]}
         projects={mockProjects as never}
+        onNavigateToTask={jest.fn()}
       />
     ), { wrappers: { theme: true } });
 
@@ -47,11 +50,28 @@ describe("Home", () => {
       <Home
         tasks={[] as never[]}
         projects={mockProjects as never}
+        onNavigateToTask={jest.fn()}
       />
     ), { wrappers: { theme: true } });
 
     expect(await findByText(/No MeisterTask tasks found/i)).toBeInTheDocument();
   });
 
-  test.todo("should navigate to issue details page")
+  test("should navigate to task details page", async () => {
+    const mockOnNavigateToIssue = jest.fn();
+
+    const { findByText } = render((
+      <Home
+        tasks={take(mockTasks, 5) as never[]}
+        projects={mockProjects as never}
+        onNavigateToTask={mockOnNavigateToIssue}
+      />
+    ), { wrappers: { theme: true } });
+
+    const taskTitle = await findByText(/Research/i);
+
+    await userEvent.click(taskTitle as Element);
+
+    expect(mockOnNavigateToIssue).toHaveBeenCalled();
+  })
 });

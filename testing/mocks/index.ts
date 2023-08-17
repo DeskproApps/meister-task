@@ -7,3 +7,4 @@ export { default as mockTaskChecklistItems } from "./mockTaskChecklistItems.json
 export { default as mockTaskChecklists } from "./mockTaskChecklists.json";
 export { default as mockTaskComments } from "./mockTaskComments.json";
 export { default as mockTaskLabels } from "./mockTaskLabels.json";
+export { default as mockPersons } from "./mockPersons.json";

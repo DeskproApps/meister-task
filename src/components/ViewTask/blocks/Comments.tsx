@@ -3,8 +3,8 @@ import get from "lodash/get";
 import find from "lodash/find";
 import size from "lodash/size";
 import { Title, HorizontalDivider } from "@deskpro/app-sdk";
-import { getFullName } from "../../../utils";
-import { Comment, Markdown } from "../../common";
+import { getFullName, addBlankTargetToLinks } from "../../../utils";
+import { Comment } from "../../common";
 import type { FC } from "react";
 import type { Person, Comment as CommentType } from "../../../services/meister-task/types";
 
@@ -22,7 +22,7 @@ const Comments: FC<Props> = ({ comments, persons }) => {
     <>
       <Title title={`Comments (${size(comments)})`} />
 
-      {comments.map(({ id, text, created_at, person_id }) => {
+      {comments.map(({ id, text_html, created_at, person_id }) => {
         const person = findPerson(person_id);
 
         return (
@@ -31,7 +31,7 @@ const Comments: FC<Props> = ({ comments, persons }) => {
               name={getFullName(person)}
               avatarUrl={get(person, ["avatar_thumb"]) as string}
               date={new Date(created_at)}
-              text={<Markdown text={text} />}
+              text={addBlankTargetToLinks(text_html)}
             />
             <HorizontalDivider style={{ marginBottom: 10 }} />
           </Fragment>

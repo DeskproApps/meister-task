@@ -2,7 +2,8 @@ import { useMemo } from "react";
 import get from "lodash/get";
 import find from "lodash/find";
 import size from "lodash/size";
-import { Stack } from "@deskpro/deskpro-ui";
+import { faFile } from "@fortawesome/free-regular-svg-icons";
+import { Stack, AttachmentTag } from "@deskpro/deskpro-ui";
 import { Title, Property, TwoProperties } from "@deskpro/app-sdk";
 import { useExternalLink } from "../../../hooks";
 import { format } from "../../../utils/date";
@@ -17,6 +18,7 @@ import {
   MeisterTaskLogo,
 } from "../../common";
 import type { FC } from "react";
+import type { AnyIcon } from "@deskpro/deskpro-ui";
 import type { Attachment, Project, Task, Label, Person } from "../../../services/meister-task/types";
 
 type Props = {
@@ -27,7 +29,7 @@ type Props = {
   attachments: Attachment[],
 };
 
-const Details: FC<Props> = ({ task, labels, projects, persons }) => {
+const Details: FC<Props> = ({ task, labels, projects, persons, attachments }) => {
   const { getTaskUrl, getProjectUrl } = useExternalLink();
   const project = useMemo(() => {
     return find(projects, { id: get(task, ["project_id"]) });
@@ -92,6 +94,22 @@ const Details: FC<Props> = ({ task, labels, projects, persons }) => {
             name={getFullName(assignee)}
             avatarUrl={get(assignee, ["avatar_thumb"])}
           />
+        )}
+      />
+      <Property
+        label="Attachments"
+        text={!size(attachments) ? "-" : (
+          <Stack gap={6} wrap="wrap">
+            {attachments.map((attach) => (
+              <AttachmentTag
+                key={attach.id}
+                filename={attach.name}
+                fileSize={attach.size}
+                icon={faFile as AnyIcon}
+                href={attach.url}
+              />
+            ))}
+          </Stack>
         )}
       />
     </>
