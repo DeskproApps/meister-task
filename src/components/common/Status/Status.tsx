@@ -1,6 +1,6 @@
 import { match } from "ts-pattern";
 import { P5 } from "@deskpro/deskpro-ui";
-import { TaskStatus } from "../../../services/meister-task/types";
+import { TaskStatus } from "../../../services/meister-task";
 import type { FC } from "react";
 import type { Task } from "../../../services/meister-task/types";
 

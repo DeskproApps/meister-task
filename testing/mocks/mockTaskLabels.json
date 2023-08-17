@@ -1,0 +1,26 @@
+[
+  {
+    "id": 9477959,
+    "project_id": 8025728,
+    "name": "MVP",
+    "color": "a179f2"
+  },
+  {
+    "id": 9477947,
+    "project_id": 8025728,
+    "name": "Priority 1",
+    "color": "d01f2e"
+  },
+  {
+    "id": 9477948,
+    "project_id": 8025728,
+    "name": "Priority 2",
+    "color": "ffaa00"
+  },
+  {
+    "id": 9477949,
+    "project_id": 8025728,
+    "name": "Priority 3",
+    "color": "3dcc3d"
+  }
+]

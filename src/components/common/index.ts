@@ -11,3 +11,7 @@ export { DeskproTickets } from "./DeskproTickets";
 export { TextWithLink } from "./TextWithLink";
 export { Status } from "./Status";
 export { MeisterTaskLogo } from "./MeisterTaskLogo";
+export { Tag } from "./Tag";
+export { Member } from "./Member";
+export { Markdown } from "./Markdown";
+export { Comment } from "./Comment";
