@@ -3,14 +3,13 @@ import get from "lodash/get";
 import find from "lodash/find";
 import { Title, TwoProperties } from "@deskpro/app-sdk";
 import { useExternalLink } from "../../hooks";
-import { nbsp } from "../../constants";
 import { format } from "../../utils/date";
 import {
   Link,
   Status,
-  LinkIcon,
   TextWithLink,
   DeskproTickets,
+  MeisterTaskLogo,
 } from "../common";
 import type { FC, MouseEventHandler } from "react";
 import type { Task, Project } from "../../services/meister-task/types";
@@ -37,10 +36,10 @@ const TaskItem: FC<Props> = ({ task, projects, onClickTitle }) => {
       <Title
         title={!onClickTitle
           ? get(task, ["name"])
-          : (
-            <><Link href="#" onClick={onClick}>{get(task, ["name"])}</Link>{nbsp}<LinkIcon href={getTaskUrl(task)}/></>
-          )
+          : (<Link href="#" onClick={onClick}>{get(task, ["name"])}</Link>)
         }
+        icon={<MeisterTaskLogo/>}
+        link={getTaskUrl(task)}
         marginBottom={10}
       />
       <TwoProperties

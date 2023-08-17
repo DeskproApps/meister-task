@@ -1,0 +1,1 @@
+export { MeisterTaskLogo } from "./MeisterTaskLogo";
