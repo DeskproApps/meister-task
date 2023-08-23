@@ -1,0 +1,40 @@
+[
+  {
+    "id": 57668969,
+    "name": "avatar.jpeg",
+    "size": 29700,
+    "source": 3,
+    "content_type": "image/jpeg",
+    "person_id": 107758481,
+    "task_id": 165040096,
+    "created_at": "2023-08-14T15:54:03.506581Z",
+    "updated_at": "2023-08-14T15:54:04.409618Z",
+    "url": "https://www.meistertask.com/attachments/57668969/download?s=original",
+    "thumb_url": "/attachments/57668969/download?s=thumb",
+    "medium_url": "/attachments/57668969/download?s=medium",
+    "large_url": "/attachments/57668969/download?s=large",
+    "embed_url": "/embed/at/57668969/original/633f72fd71486dd8ce43edc8478e4307edda1522.jpeg",
+    "embed_thumb_url": "/embed/at/57668969/thumb/6fd5ca528f7ac51a50f0e359f540932bd105e38d.png",
+    "embed_medium_url": "/embed/at/57668969/medium/cccf9ae007c1817afbe2a3c5bddb7908a83e6b5b.png",
+    "embed_large_url": "/embed/at/57668969/large/4ea7ada31b0cf5f2b5b7aaf675a817893387edb7.png"
+  },
+  {
+    "id": 57804736,
+    "name": "sam-html.pdf",
+    "size": 1395021,
+    "source": 3,
+    "content_type": "application/pdf",
+    "person_id": 107758481,
+    "task_id": 165040096,
+    "created_at": "2023-08-17T09:49:35.402668Z",
+    "updated_at": "2023-08-17T09:49:36.083772Z",
+    "url": "https://www.meistertask.com/attachments/57804736/download?s=original",
+    "thumb_url": "/attachments/57804736/download?s=thumb",
+    "medium_url": "/attachments/57804736/download?s=medium",
+    "large_url": "/attachments/57804736/download?s=large",
+    "embed_url": "/embed/at/57804736/original/abe1995c6a10f44e5cb7a23ce7a907ed3c01c47d.pdf",
+    "embed_thumb_url": "/embed/at/57804736/thumb/083be2ad5372fa8ba27491070fbdf8898cceee88.png",
+    "embed_medium_url": "/embed/at/57804736/medium/693a30cb98eb7dd435fedd4ce98125768f995994.png",
+    "embed_large_url": "/embed/at/57804736/large/46f35a89b736b808d4abd6cce933f7eeca785b52.png"
+  }
+]

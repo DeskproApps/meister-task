@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import get from "lodash/get";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 import { match } from "ts-pattern";
@@ -8,11 +9,12 @@ import {
   useDeskproAppClient,
   useDeskproAppEvents,
 } from "@deskpro/app-sdk";
-import { useLogout } from "./hooks";
+import { useLogout, useUnlinkTask } from "./hooks";
 import { isNavigatePayload } from "./utils";
 import {
   HomePage,
   LoginPage,
+  ViewTaskPage,
   LinkTasksPage,
   LoadingAppPage,
   AdminCallbackPage,
@@ -24,8 +26,10 @@ const App: FC = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { client } = useDeskproAppClient();
-  const { logout, isLoading } = useLogout();
+  const { logout, isLoading: isLoadingLogout } = useLogout();
+  const { unlink, isLoading: isLoadingUnlink } = useUnlinkTask();
   const isAdmin = useMemo(() => pathname.includes("/admin/"), [pathname]);
+  const isLoading = [isLoadingLogout, isLoadingUnlink].some((isLoading) => isLoading);
 
   useDeskproElements(({ registerElement }) => {
     registerElement("refresh", { type: "refresh_button" });
@@ -39,6 +43,7 @@ const App: FC = () => {
         }
       })
       .with("logout", logout)
+      .with("unlink", () => unlink(get(payload, ["task"])))
       .run();
   }, 500);
 
@@ -64,6 +69,7 @@ const App: FC = () => {
         <Route path="/login" element={<LoginPage/>}/>)
         <Route path="/link" element={<LinkTasksPage/>}/>)
         <Route path="/home" element={<HomePage/>}/>)
+        <Route path="/task/view/:taskId" element={<ViewTaskPage/>}/>
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

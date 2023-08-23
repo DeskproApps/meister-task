@@ -1,0 +1,22 @@
+[
+  {
+    "id": 83745041,
+    "firstname": "David",
+    "lastname": "Test",
+    "email": "davidtestacc0401@gmail.com",
+    "avatar": null,
+    "avatar_thumb": null,
+    "created_at": "2022-01-11T18:02:14.000000Z",
+    "updated_at": "2022-01-11T18:02:14.000000Z"
+  },
+  {
+    "id": 107758481,
+    "firstname": "ilia",
+    "lastname": "makarov",
+    "email": "ilia.makarov@me.com",
+    "avatar": "https://www.mindmeister.com/files/avatars/7996/8901/original/avatar.jpeg",
+    "avatar_thumb": "https://www.mindmeister.com/files/avatars/7996/8901/medium/avatar.jpeg",
+    "created_at": "2023-08-11T16:46:37.000000Z",
+    "updated_at": "2023-08-11T16:46:37.000000Z"
+  }
+]

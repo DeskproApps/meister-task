@@ -30,7 +30,8 @@ const Search: FC<Props> = ({
 
   const onClearSearch = useCallback(() => {
     setSearch("");
-  }, []);
+    onChange && onChange("");
+  }, [onChange]);
 
   return (
     <Label

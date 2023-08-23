@@ -5,3 +5,4 @@ export { useLogout } from "./useLogout";
 export { useExternalLink } from "./useExternalLink";
 export { useLinkedTasks } from "./useLinkedTasks";
 export { useQueriesWithClient } from "./useQueriesWithClient";
+export { useUnlinkTask } from "./useUnlinkTask";

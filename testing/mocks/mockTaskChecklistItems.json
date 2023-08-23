@@ -1,0 +1,90 @@
+[
+  {
+    "id": 254019858,
+    "checklist_id": 85139702,
+    "sequence": 0.0,
+    "name": "Figure out what the MeisterTask",
+    "text_html": "<p>Figure out what the MeisterTask</p>\n",
+    "text_email": "<p>Figure out what the MeisterTask</p>\n",
+    "status": 1,
+    "created_at": "2023-08-11T16:53:07.703346Z",
+    "updated_at": "2023-08-11T16:53:07.703346Z"
+  },
+  {
+    "id": 254019859,
+    "checklist_id": 85139702,
+    "sequence": 15000.0,
+    "name": "Figure out the API of the MeisterTask",
+    "text_html": "<p>Figure out the API of the MeisterTask</p>\n",
+    "text_email": "<p>Figure out the API of the MeisterTask</p>\n",
+    "status": 1,
+    "created_at": "2023-08-11T16:53:10.139783Z",
+    "updated_at": "2023-08-11T16:53:10.139783Z"
+  },
+  {
+    "id": 254019865,
+    "checklist_id": 85139702,
+    "sequence": 30000.0,
+    "name": "Create stories",
+    "text_html": "<p>Create stories</p>\n",
+    "text_email": "<p>Create stories</p>\n",
+    "status": 1,
+    "created_at": "2023-08-11T16:53:21.460938Z",
+    "updated_at": "2023-08-11T16:53:21.460938Z"
+  },
+  {
+    "id": 254019867,
+    "checklist_id": 85139702,
+    "sequence": 45000.0,
+    "name": "Create repository",
+    "text_html": "<p>Create repository</p>\n",
+    "text_email": "<p>Create repository</p>\n",
+    "status": 1,
+    "created_at": "2023-08-11T16:53:26.157416Z",
+    "updated_at": "2023-08-11T16:53:26.157416Z"
+  },
+  {
+    "id": 254019874,
+    "checklist_id": 85139702,
+    "sequence": 60000.0,
+    "name": "Init App",
+    "text_html": "<p>Init App</p>\n",
+    "text_email": "<p>Init App</p>\n",
+    "status": 1,
+    "created_at": "2023-08-11T16:53:38.369394Z",
+    "updated_at": "2023-08-11T16:53:38.369394Z"
+  },
+  {
+    "id": 254689178,
+    "checklist_id": 85297146,
+    "sequence": 0.0,
+    "name": "hey",
+    "text_html": "<p>hey</p>\n",
+    "text_email": "<p>hey</p>\n",
+    "status": 1,
+    "created_at": "2023-08-17T09:44:10.762786Z",
+    "updated_at": "2023-08-17T09:44:10.762786Z"
+  },
+  {
+    "id": 254689187,
+    "checklist_id": 85297146,
+    "sequence": 15000.0,
+    "name": "ho",
+    "text_html": "<p>ho</p>\n",
+    "text_email": "<p>ho</p>\n",
+    "status": 1,
+    "created_at": "2023-08-17T09:44:13.792106Z",
+    "updated_at": "2023-08-17T09:44:13.792106Z"
+  },
+  {
+    "id": 254689202,
+    "checklist_id": 85297146,
+    "sequence": 30000.0,
+    "name": "let's go",
+    "text_html": "<p>let&#39;s go</p>\n",
+    "text_email": "<p>let&#39;s go</p>\n",
+    "status": 1,
+    "created_at": "2023-08-17T09:44:17.084675Z",
+    "updated_at": "2023-08-17T09:44:17.084675Z"
+  }
+]

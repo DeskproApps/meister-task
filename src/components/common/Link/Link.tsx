@@ -18,7 +18,7 @@ const Link = styled.a<{ color?: keyof ThemeColors }>`
 
 const LinkIcon: FC<Props> = ({ size = 10, color = "grey40", href, ...props }) => {
   return !href ? <></> : (
-    <Link target="_blank" color={color} {...props}>
+    <Link target="_blank" color={color} href={href} {...props}>
       <Icon size={size} icon={faArrowUpRightFromSquare as AnyIcon} />
     </Link>
   )
