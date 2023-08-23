@@ -3,7 +3,7 @@ import size from "lodash/size";
 import filter from "lodash/filter";
 import { P5, P7, Stack, Checkbox } from "@deskpro/deskpro-ui";
 import { Title } from "@deskpro/app-sdk";
-import { ChecklistItemStatus } from "../../../services/meister-task";
+import { checklistItemStatus } from "../../../services/meister-task";
 import { Card, NoFound } from "../../common";
 import type { FC } from "react";
 import type { Checklist, ChecklistItem } from "../../../services/meister-task/types";
@@ -18,7 +18,7 @@ const Item: FC<{ item: ChecklistItem }> = ({ item }) => {
           id={`${item.id}`}
           size={boxSize}
           disabled={true}
-          checked={item.status === ChecklistItemStatus.COMPLETED}
+          checked={item.status === checklistItemStatus.COMPLETED}
         />
       </Card.Media>
       <Card.Body size={boxSize}><P5>{item.name}</P5></Card.Body>

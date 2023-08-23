@@ -49,6 +49,8 @@ const LinkTasksPage: FC = () => {
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
+  const onNavigateToCreate = useCallback(() => navigate("/task/create"), [navigate]);
+
   const onLinkTasks = useCallback(() => {
     if (!client || !ticketId || !size(selectedTasks)) {
       return;
@@ -90,6 +92,7 @@ const LinkTasksPage: FC = () => {
       onCancel={onCancel}
       selectedProject={selectedProject}
       onChangeProject={setSelectedProject}
+      onNavigateToCreate={onNavigateToCreate}
     />
   );
 };
