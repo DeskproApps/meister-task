@@ -34,7 +34,7 @@ const ViewTaskPage: FC = () => {
     registerElement("menu", {
       type: "menu",
       items: [{
-        title: "Unlink issue",
+        title: "Unlink task",
         payload: { type: "unlink", task },
       }],
     });
