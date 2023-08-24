@@ -15,7 +15,4 @@ export { getProjectSectionsService } from "./getProjectSectionsService";
 export { getProjectLabelsService } from "./getProjectLabelsService";
 export { createTaskService } from "./createTaskService";
 export { updateTaskService } from "./updateTaskService";
-export { addLabelToTaskService } from "./addLabelToTaskService";
-export { removeLabelFromTaskService } from "./removeLabelFromTaskService";
-export { updateTaskLabelsService } from "./updateTaskLabelsService";
 export { updateChecklistItemService } from "./updateChecklistItemService";

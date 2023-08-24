@@ -8,6 +8,7 @@ import { Title, Property, TwoProperties } from "@deskpro/app-sdk";
 import { useExternalLink } from "../../../hooks";
 import { format } from "../../../utils/date";
 import { getFullName } from "../../../utils";
+import { DATE_FORMAT, TIME_FORMAT } from "../../../constants";
 import {
   Tag,
   Status,
@@ -72,7 +73,7 @@ const Details: FC<Props> = ({ task, labels, projects, persons, attachments }) =>
         leftLabel="Date Created"
         leftText={format(get(task, ["created_at"]))}
         rightLabel="Due date"
-        rightText={format(get(task, ["due"]))}
+        rightText={format(get(task, ["due"]), `${DATE_FORMAT} ${TIME_FORMAT}`)}
       />
       <Property
         label="Deskpro Tickets"

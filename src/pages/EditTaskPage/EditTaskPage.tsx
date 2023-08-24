@@ -9,8 +9,8 @@ import {
 } from "@deskpro/app-sdk";
 import { useSetTitle, useAsyncError } from "../../hooks";
 import { useTask } from "./hooks";
-import { updateTaskService, updateTaskLabelsService } from "../../services/meister-task";
-import { getSectionId, getTaskValues, getLabelsToUpdate } from "../../components/TaskForm";
+import { updateTaskService } from "../../services/meister-task";
+import { getSectionId, getTaskValues } from "../../components/TaskForm";
 import { EditTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
@@ -46,9 +46,6 @@ const EditTaskPage: FC = () => {
       ...getTaskValues(values),
       section_id: getSectionId(values),
     })
-      .then((task) => Promise.all([
-        ...updateTaskLabelsService(client, task.id, getLabelsToUpdate(labelIds, values)),
-      ]))
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
@@ -60,7 +57,7 @@ const EditTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, taskId, labelIds, ticketId, navigate, asyncErrorHandler]);
+  }, [client, taskId, ticketId, navigate, asyncErrorHandler]);
 
   useSetTitle("Edit Task");
 
