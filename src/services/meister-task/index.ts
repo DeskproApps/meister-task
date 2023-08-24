@@ -14,3 +14,4 @@ export { getProjectPersonsService } from "./getProjectPersonsService";
 export { getProjectSectionsService } from "./getProjectSectionsService";
 export { getProjectLabelsService } from "./getProjectLabelsService";
 export { createTaskService } from "./createTaskService";
+export { updateTaskService } from "./updateTaskService";

@@ -6,7 +6,11 @@ describe("TaskForm", () => {
   describe("getTaskValues", () => {
     test("should return required values", () => {
       const values = pick(mockValues, ["name", "section", "project"]);
-      expect(getTaskValues(values as never)).toStrictEqual({ name: "Task for test" });
+      expect(getTaskValues(values as never)).toStrictEqual({
+        name: "Task for test",
+        notes: "",
+        label_ids: [],
+      });
     });
 
     test("should return full task values", () => {

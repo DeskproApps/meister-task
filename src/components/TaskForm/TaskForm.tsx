@@ -17,7 +17,14 @@ import type { FC } from "react";
 import type { FormValidationSchema, Props } from "./types";
 import type { Project, Section, Person, TaskStatus } from "../../services/meister-task/types";
 
-const TaskForm: FC<Props> = ({ error, onSubmit, onCancel, isEditMode }) => {
+const TaskForm: FC<Props> = ({
+  task,
+  error,
+  labelIds,
+  onSubmit,
+  onCancel,
+  isEditMode,
+}) => {
   const {
     watch,
     register,
@@ -25,7 +32,7 @@ const TaskForm: FC<Props> = ({ error, onSubmit, onCancel, isEditMode }) => {
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValidationSchema>({
-    defaultValues: getInitValues(),
+    defaultValues: getInitValues(task, labelIds),
     resolver: zodResolver(validationSchema),
   });
   const {
@@ -55,6 +62,8 @@ const TaskForm: FC<Props> = ({ error, onSubmit, onCancel, isEditMode }) => {
           options={projectOptions}
           onChange={({ value }) => {
             setValue("project", value);
+            setValue("section", 0);
+            setValue("assignee", 0);
           }}
           error={has(errors, ["project", "message"])}
         />

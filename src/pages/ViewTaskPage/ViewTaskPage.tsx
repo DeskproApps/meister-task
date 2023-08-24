@@ -31,6 +31,10 @@ const ViewTaskPage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    registerElement("edit", {
+      type: "edit_button",
+      payload: { type: "changePage", path: `/task/edit/${taskId}` }
+    });
     registerElement("menu", {
       type: "menu",
       items: [{
@@ -38,7 +42,7 @@ const ViewTaskPage: FC = () => {
         payload: { type: "unlink", task },
       }],
     });
-  }, [task]);
+  }, [taskId, task]);
 
   if (isLoading) {
     return (

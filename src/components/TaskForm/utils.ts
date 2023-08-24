@@ -9,7 +9,7 @@ import { getOption, getFullName } from "../../utils";
 import { taskStatus } from "../../services/meister-task";
 import { Member, Tag } from "../common";
 import type { Option } from "../../types";
-import type { Person, Label, TaskStatus, Section } from "../../services/meister-task/types";
+import type { Task, Person, Label, TaskStatus, Section } from "../../services/meister-task/types";
 import type { FormValidationSchema, TaskValues } from "./types";
 
 const validationSchema = z.object({
@@ -23,21 +23,26 @@ const validationSchema = z.object({
     z.literal(8),
     z.literal(18),
   ]),
-  assignee: z.number().optional(),
+  assignee: z.number().nullish(),
   dueDate: z.date().optional(),
   labels: z.array(z.number()).optional(),
 });
 
-const getInitValues = (): FormValidationSchema => {
+const getInitValues = (
+  task?: Task,
+  labelIds?: Array<Label["id"]>,
+): FormValidationSchema => {
+  const dueDate = get(task, ["due"], null);
+
   return {
-    project: 0,
-    section: 0,
-    name: "",
-    description: "",
-    assignee: 0,
-    dueDate: undefined,
-    status: taskStatus.OPEN,
-    labels: [],
+    project: get(task, ["project_id"], 0),
+    section: get(task, ["section_id"], 0),
+    name: get(task, ["name"], ""),
+    description: get(task, ["notes"], ""),
+    assignee: get(task, ["assigned_to_id"], 0),
+    dueDate: !dueDate ? undefined : new Date(dueDate),
+    status: get(task, ["status"], taskStatus.OPEN),
+    labels: isEmpty(labelIds) ? [] : labelIds,
   };
 };
 
@@ -50,11 +55,11 @@ const getTaskValues = (values: FormValidationSchema): TaskValues => {
 
   return {
     name: get(values, ["name"]),
-    ...(!notes ? {} : { notes }),
+    notes: !notes ? "" : notes,
+    label_ids: isEmpty(labelIds) ? [] : labelIds,
     ...(!assigneeId ? {} : { assigned_to_id: assigneeId }),
     ...(!dueDate ? {} : { due: formatISO(dueDate) }),
     ...(!status ? {} : { status }),
-    ...(isEmpty(labelIds) ? {} : { label_ids: labelIds }),
   };
 };
 
