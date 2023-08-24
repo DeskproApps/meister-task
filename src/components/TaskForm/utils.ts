@@ -3,7 +3,6 @@ import get from "lodash/get";
 import trim from "lodash/trim";
 import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
-import difference from "lodash/difference";
 import formatISO from "date-fns/formatISO";
 import { z } from "zod";
 import { getOption, getFullName } from "../../utils";
@@ -68,21 +67,6 @@ const getSectionId = (values: FormValidationSchema): Section["id"] => {
   return get(values, ["section"]);
 };
 
-const getLabelsToUpdate = (
-  taskLabelIds: Array<Label["id"]>,
-  values: FormValidationSchema,
-): {
-  add: Array<Label["id"]>,
-  rem: Array<Label["id"]>,
-} => {
-  const updatedLabelIds = get(values, ["labels"], []) || [];
-
-  return {
-    add: difference(updatedLabelIds, taskLabelIds),
-    rem: difference(taskLabelIds, updatedLabelIds),
-  };
-};
-
 const getOptions = <T>(items?: T[]) => {
   if (!Array.isArray(items) || !size(items)) {
     return [];
@@ -135,5 +119,4 @@ export {
   getPersonOptions,
   getStatusOptions,
   validationSchema,
-  getLabelsToUpdate,
 };
