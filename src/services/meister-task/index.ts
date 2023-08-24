@@ -18,3 +18,4 @@ export { updateTaskService } from "./updateTaskService";
 export { addLabelToTaskService } from "./addLabelToTaskService";
 export { removeLabelFromTaskService } from "./removeLabelFromTaskService";
 export { updateTaskLabelsService } from "./updateTaskLabelsService";
+export { updateChecklistItemService } from "./updateChecklistItemService";

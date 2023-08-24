@@ -1,45 +1,47 @@
-import { useMemo } from "react";
+import { useMemo, useCallback } from "react";
 import size from "lodash/size";
 import filter from "lodash/filter";
-import { P5, P7, Stack, Checkbox } from "@deskpro/deskpro-ui";
+import { P7, Stack } from "@deskpro/deskpro-ui";
 import { Title } from "@deskpro/app-sdk";
 import { checklistItemStatus } from "../../../services/meister-task";
-import { Card, NoFound } from "../../common";
+import { NoFound, ChecklistItem } from "../../common";
 import type { FC } from "react";
-import type { Checklist, ChecklistItem } from "../../../services/meister-task/types";
-
-const Item: FC<{ item: ChecklistItem }> = ({ item }) => {
-  const boxSize = 14;
-
-  return (
-    <Card style={{ marginBottom: 7 }}>
-      <Card.Media>
-        <Checkbox
-          id={`${item.id}`}
-          size={boxSize}
-          disabled={true}
-          checked={item.status === checklistItemStatus.COMPLETED}
-        />
-      </Card.Media>
-      <Card.Body size={boxSize}><P5>{item.name}</P5></Card.Body>
-    </Card>
-  );
-}
+import type {
+  Checklist,
+  ChecklistItemStatus,
+  ChecklistItem as ChecklistItemType,
+} from "../../../services/meister-task/types";
 
 const CheckList: FC<{
   checklist: Checklist,
-  checklistItems: ChecklistItem[],
-}> = ({ checklist, checklistItems }) => {
+  checklistItems: ChecklistItemType[],
+  onCompleteChecklist: (
+    itemId: ChecklistItemType["id"],
+    status: ChecklistItemStatus,
+  ) => Promise<void>,
+}> = ({ checklist, checklistItems, onCompleteChecklist }) => {
   const items = useMemo(() => {
     return filter(checklistItems, { checklist_id: checklist.id });
   }, [checklistItems, checklist]);
+
+  const onComplete = useCallback((item: ChecklistItemType) => {
+    const status = (item.status === checklistItemStatus.COMPLETED)
+      ? checklistItemStatus.ACTIONABLE
+      : checklistItemStatus.COMPLETED;
+    return onCompleteChecklist(item.id, status);
+  }, [onCompleteChecklist]);
 
   return (
     <div style={{ marginBottom: 10, width: "100%" }}>
       <Title as={P7} title={checklist.name} marginBottom={7} />
 
       {(Array.isArray(items) ? items : []).map((item) => (
-        <Item key={item.id} item={item} />
+        <ChecklistItem
+          key={item.id}
+          name={item.name}
+          checked={item.status === checklistItemStatus.COMPLETED}
+          onComplete={() => onComplete(item)}
+        />
       ))}
     </div>
   );
@@ -47,8 +49,12 @@ const CheckList: FC<{
 
 const Checklists: FC<{
   checklists: Checklist[],
-  checklistItems: ChecklistItem[],
-}> = ({ checklists, checklistItems }) => {
+  checklistItems: ChecklistItemType[],
+  onCompleteChecklist: (
+    itemId: ChecklistItemType["id"],
+    status: ChecklistItemStatus,
+  ) => Promise<void>,
+}> = ({ checklists, checklistItems, onCompleteChecklist }) => {
   return (
     <>
       <Title title="Checklists" />
@@ -61,6 +67,7 @@ const Checklists: FC<{
               key={checklist.id}
               checklist={checklist}
               checklistItems={checklistItems}
+              onCompleteChecklist={onCompleteChecklist}
             />
           ))
         }
