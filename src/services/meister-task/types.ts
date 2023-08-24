@@ -1,4 +1,11 @@
+import { taskStatus, sectionStatus, checklistItemStatus } from "./constants";
 import type { Maybe, DateTime } from "../../types";
+
+export type TaskStatus = typeof taskStatus[keyof typeof taskStatus];
+
+export type SectionStatus = typeof sectionStatus[keyof typeof sectionStatus];
+
+export type ChecklistItemStatus = typeof checklistItemStatus[keyof typeof checklistItemStatus]
 
 export type MeisterTaskAPIError = {
   errors: Array<{
@@ -69,11 +76,6 @@ export type Checklist = {
   project_id: Project["id"],
 };
 
-export enum ChecklistItemStatus {
-  ACTIONABLE = 1,
-  COMPLETED = 5
-}
-
 // 8xx
 export type ChecklistItem = {
   id: number,
@@ -82,7 +84,7 @@ export type ChecklistItem = {
   name: string,
   text_html: string,
   text_email: string,
-  status: number, // 1: actionable, 5: completed
+  status: ChecklistItemStatus,
   created_at: string,
   updated_at: string,
 };
@@ -106,12 +108,19 @@ export type Label = {
   color: string,
 };
 
-export enum TaskStatus {
-  OPEN = 1,
-  COMPLETED = 2,
-  ARCHIVED = 18,
-  TRASHED = 8,
-}
+export type Section = {
+  id: number,
+  name: string,
+  description: string,
+  color: string, // "2ed7d8",
+  indicator: number, // the icon of the section.
+  status: SectionStatus,
+  project_id: Project["id"],
+  sequence: number,
+  limit: null,
+  created_at: DateTime,
+  updated_at: DateTime,
+};
 
 // 3xx
 export type Task =  {
@@ -120,13 +129,13 @@ export type Task =  {
   name: string,
   notes: string,
   notes_html: string,
-  status: TaskStatus[keyof TaskStatus],
+  status: TaskStatus,
   status_updated_at: DateTime,
-  section_id: number, // 2xx
-  section_name: string,
+  section_id: Section["id"], // 2xx
+  section_name: Section["name"],
   project_id: Project["id"],
   sequence: number,
-  assigned_to_id: null,
+  assigned_to_id: Maybe<Person["id"]>,
   assignee_name: string,
   tracked_time: number,
   due: DateTime,

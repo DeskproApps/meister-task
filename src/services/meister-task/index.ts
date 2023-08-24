@@ -1,4 +1,5 @@
 export { MeisterTaskError } from "./MeisterTaskError";
+export { taskStatus, sectionStatus, checklistItemStatus } from "./constants";
 export { getAccessTokenService } from "./getAccessTokenService";
 export { getCurrentPersonService } from "./getCurrentPersonService";
 export { getTasksService } from "./getTasksService";
@@ -10,4 +11,6 @@ export { getTaskChecklistsService } from "./getTaskChecklistsService";
 export { getTaskCommentsService } from "./getTaskCommentsService";
 export { getTaskLabelsService } from "./getTaskLabelsService";
 export { getProjectPersonsService } from "./getProjectPersonsService";
-export { ChecklistItemStatus, TaskStatus } from "./types";
+export { getProjectSectionsService } from "./getProjectSectionsService";
+export { getProjectLabelsService } from "./getProjectLabelsService";
+export { createTaskService } from "./createTaskService";

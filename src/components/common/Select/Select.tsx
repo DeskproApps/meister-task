@@ -66,7 +66,7 @@ const Select = <T,>({
       return filteredOptions;
     } else {
       const o = options.find((o) => o.value === value);
-      return get(o, ["label"], value);
+      return get(o, ["label"]);
     }
   }, [value, options]) as ReactNode;
 

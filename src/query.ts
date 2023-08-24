@@ -22,6 +22,8 @@ enum QueryKey {
   TASK_LABELS = "taskLabels",
   PERSON = "person",
   PERSONS_BY_PROJECT = "personsByProject",
+  SECTIONS_BY_PROJECT = "sectionsByProject",
+  LABELS_BY_PROJECT = "labelsByProject",
 }
 
 export { queryClient, QueryKey };

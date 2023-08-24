@@ -16,6 +16,7 @@ import {
   LoginPage,
   ViewTaskPage,
   LinkTasksPage,
+  CreateTaskPage,
   LoadingAppPage,
   AdminCallbackPage,
 } from "./pages";
@@ -70,6 +71,7 @@ const App: FC = () => {
         <Route path="/link" element={<LinkTasksPage/>}/>)
         <Route path="/home" element={<HomePage/>}/>)
         <Route path="/task/view/:taskId" element={<ViewTaskPage/>}/>
+        <Route path="/task/create" element={<CreateTaskPage/>}/>)
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

@@ -17,7 +17,7 @@ describe("ViewTask", () => {
       const { findByText  } = render((
         <Checklists
           checklists={mockTaskChecklists}
-          checklistItems={mockTaskChecklistItems}
+          checklistItems={mockTaskChecklistItems as never}
         />
       ), { wrappers: { theme: true } });
 
