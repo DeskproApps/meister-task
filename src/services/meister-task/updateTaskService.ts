@@ -15,7 +15,7 @@ const updateTaskService = (
     due: DateTime,
   }>,
 ) => {
-  return baseRequest(client, {
+  return baseRequest<Task>(client, {
     url: `/tasks/${taskId}`,
     method: "PUT",
     data,
