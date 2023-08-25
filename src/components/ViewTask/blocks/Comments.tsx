@@ -11,16 +11,20 @@ import type { Person, Comment as CommentType } from "../../../services/meister-t
 type Props = {
   persons: Person[],
   comments: CommentType[],
+  onNavigateToAddComment: () => void,
 };
 
-const Comments: FC<Props> = ({ comments, persons }) => {
+const Comments: FC<Props> = ({ comments, persons, onNavigateToAddComment }) => {
   const findPerson = useCallback((personId: Person["id"]) => {
     return find(persons, { id: personId });
   }, [persons]);
 
   return (
     <>
-      <Title title={`Comments (${size(comments)})`} />
+      <Title
+        title={`Comments (${size(comments)})`}
+        onClick={onNavigateToAddComment}
+      />
 
       {comments.map(({ id, text_html, created_at, person_id }) => {
         const person = findPerson(person_id);

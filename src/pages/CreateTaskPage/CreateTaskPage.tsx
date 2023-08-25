@@ -1,5 +1,6 @@
 import { useMemo, useState, useCallback } from "react";
 import get from "lodash/get";
+import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
 import { useNavigate } from "react-router-dom";
 import {
@@ -43,7 +44,7 @@ const CreateTaskPage: FC = () => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
           .map(({ message }) => message);
 
-        if (errors) {
+        if (size(errors)) {
           setError(errors);
         } else {
           asyncErrorHandler(err);

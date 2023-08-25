@@ -16,3 +16,4 @@ export { getProjectLabelsService } from "./getProjectLabelsService";
 export { createTaskService } from "./createTaskService";
 export { updateTaskService } from "./updateTaskService";
 export { updateChecklistItemService } from "./updateChecklistItemService";
+export { createTaskCommentService } from "./createTaskCommentService";

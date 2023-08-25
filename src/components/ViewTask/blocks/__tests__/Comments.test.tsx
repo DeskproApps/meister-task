@@ -16,6 +16,7 @@ describe("ViewTask", () => {
         <Comments
           persons={mockPersons}
           comments={mockTaskComments}
+          onNavigateToAddComment={jest.fn()}
         />
       ), { wrappers: { theme: true } });
 

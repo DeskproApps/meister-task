@@ -16,7 +16,7 @@ import {
   Markdown,
   TextWithLink,
   DeskproTickets,
-  MeisterTaskLogo, DateInput,
+  MeisterTaskLogo,
 } from "../../common";
 import type { FC } from "react";
 import type { AnyIcon } from "@deskpro/deskpro-ui";

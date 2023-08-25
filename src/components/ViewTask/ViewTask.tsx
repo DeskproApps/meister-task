@@ -23,6 +23,7 @@ type Props = {
   attachments: Attachment[],
   checklists: Checklist[],
   checklistItems: ChecklistItem[],
+  onNavigateToAddComment: () => void,
   onCompleteChecklist: (itemId: ChecklistItem["id"], status: ChecklistItemStatus,) => Promise<void>,
 };
 
@@ -36,6 +37,7 @@ const ViewTask: FC<Props> = ({
   attachments,
   checklistItems,
   onCompleteChecklist,
+  onNavigateToAddComment,
 }) => {
   return (
     <>
@@ -62,7 +64,11 @@ const ViewTask: FC<Props> = ({
       <HorizontalDivider/>
 
       <Container>
-        <Comments comments={comments} persons={persons} />
+        <Comments
+          persons={persons}
+          comments={comments}
+          onNavigateToAddComment={onNavigateToAddComment}
+        />
       </Container>
     </>
   );

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   LoadingSpinner,
   useDeskproElements,
@@ -14,6 +14,7 @@ import type { FC } from "react";
 import type { ChecklistItem, ChecklistItemStatus } from "../../services/meister-task/types";
 
 const ViewTaskPage: FC = () => {
+  const navigate = useNavigate();
   const { taskId } = useParams();
   const { client } = useDeskproAppClient();
   const { asyncErrorHandler } = useAsyncError();
@@ -41,6 +42,10 @@ const ViewTaskPage: FC = () => {
       .then(() => queryClient.invalidateQueries())
       .catch(asyncErrorHandler);
   }, [client, asyncErrorHandler]);
+
+  const onNavigateToAddComment = useCallback(() => {
+    navigate(`/task/view/${taskId}/comments/create`);
+  }, [navigate, taskId]);
 
   useSetTitle(task.token);
 
@@ -81,6 +86,7 @@ const ViewTaskPage: FC = () => {
       checklists={checklists}
       checklistItems={checklistItems}
       onCompleteChecklist={onCompleteChecklist}
+      onNavigateToAddComment={onNavigateToAddComment}
     />
   );
 };
