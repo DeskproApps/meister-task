@@ -11,6 +11,7 @@ import {
 import { setEntityService } from "../../services/deskpro";
 import {
   useSetTitle,
+  useReplyBox,
   useAsyncError,
   useLinkedAutoComment,
 } from "../../hooks";
@@ -26,6 +27,7 @@ const LinkTasksPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -66,13 +68,15 @@ const LinkTasksPage: FC = () => {
     return Promise.all([
       ...selectedTasks.map((task) => setEntityService(client, ticketId, `${task.id}`)),
       ...selectedTasks.map((task) => addLinkComment(task.id)),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "email")),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "note")),
     ])
       .then(() => {
         setIsSubmitting(false);
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, selectedTasks, addLinkComment, navigate, asyncErrorHandler]);
+  }, [client, ticketId, selectedTasks, addLinkComment, setSelectionState, navigate, asyncErrorHandler]);
 
   useSetTitle("Link Tasks");
 

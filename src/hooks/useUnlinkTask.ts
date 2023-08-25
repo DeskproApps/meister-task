@@ -8,6 +8,7 @@ import {
 } from "@deskpro/app-sdk";
 import { deleteEntityService } from "../services/deskpro";
 import { useLinkedAutoComment } from "./useLinkedAutoComment";
+import { useReplyBox } from "./useReplyBox";
 import { useAsyncError } from "./useAsyncError";
 import type { TicketContext } from "../types";
 import type { Task } from "../services/meister-task/types";
@@ -22,6 +23,7 @@ const useUnlinkTask = (): Result => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addUnlinkComment } = useLinkedAutoComment();
+  const { deleteSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ticketId = get(context, ["data", "ticket", "id"]);
@@ -36,13 +38,15 @@ const useUnlinkTask = (): Result => {
     Promise.all([
       deleteEntityService(client, ticketId, `${task.id}`),
       addUnlinkComment(task.id),
+      deleteSelectionState(task.id, "note"),
+      deleteSelectionState(task.id, "email"),
     ])
       .then(() => {
         setIsLoading(false);
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, navigate, addUnlinkComment, asyncErrorHandler]);
+  }, [client, ticketId, navigate, addUnlinkComment, deleteSelectionState, asyncErrorHandler]);
 
   return { isLoading, unlink };
 };

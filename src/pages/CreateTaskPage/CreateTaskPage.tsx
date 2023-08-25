@@ -12,6 +12,7 @@ import { setEntityService } from "../../services/deskpro";
 import { createTaskService } from "../../services/meister-task";
 import {
   useSetTitle,
+  useReplyBox,
   useAsyncError,
   useLinkedAutoComment,
 } from "../../hooks";
@@ -27,6 +28,7 @@ const CreateTaskPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
@@ -46,6 +48,8 @@ const CreateTaskPage: FC = () => {
       .then((task) => Promise.all([
         setEntityService(client, ticketId, `${task.id}`),
         addLinkComment(task.id),
+        setSelectionState(task.id, true, "email"),
+        setSelectionState(task.id, true, "note"),
       ]))
       .then(() => navigate("/home"))
       .catch((err) => {
@@ -58,7 +62,7 @@ const CreateTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, ticketId, addLinkComment, asyncErrorHandler, navigate]);
+  }, [client, ticketId, addLinkComment, setSelectionState, asyncErrorHandler, navigate]);
 
   useSetTitle("Link Tasks");
 

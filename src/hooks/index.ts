@@ -7,3 +7,4 @@ export { useLinkedTasks } from "./useLinkedTasks";
 export { useQueriesWithClient } from "./useQueriesWithClient";
 export { useUnlinkTask } from "./useUnlinkTask";
 export { useLinkedAutoComment } from "./useLinkedAutoComment";
+export { useReplyBox, ReplyBoxProvider } from "./useReplyBox";
