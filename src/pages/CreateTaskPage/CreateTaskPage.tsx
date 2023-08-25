@@ -10,7 +10,11 @@ import {
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
 import { createTaskService } from "../../services/meister-task";
-import { useSetTitle, useAsyncError } from "../../hooks";
+import {
+  useSetTitle,
+  useAsyncError,
+  useLinkedAutoComment,
+} from "../../hooks";
 import { getTaskValues, getSectionId } from "../../components/TaskForm";
 import { CreateTask } from "../../components";
 import type { FC } from "react";
@@ -22,6 +26,7 @@ const CreateTaskPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addLinkComment } = useLinkedAutoComment();
   const { asyncErrorHandler } = useAsyncError();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
@@ -38,7 +43,10 @@ const CreateTaskPage: FC = () => {
     setError(null);
 
     return createTaskService(client, getSectionId(values), getTaskValues(values))
-      .then((task) => setEntityService(client, ticketId, `${task.id}`))
+      .then((task) => Promise.all([
+        setEntityService(client, ticketId, `${task.id}`),
+        addLinkComment(task.id),
+      ]))
       .then(() => navigate("/home"))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
@@ -50,7 +58,7 @@ const CreateTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, ticketId, asyncErrorHandler, navigate]);
+  }, [client, ticketId, addLinkComment, asyncErrorHandler, navigate]);
 
   useSetTitle("Link Tasks");
 

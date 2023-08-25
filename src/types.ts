@@ -33,6 +33,7 @@ export type Request = <T>(
 /** Deskpro types */
 export type Settings = {
   client_id?: string,
+  add_comment_when_linking?: boolean,
 };
 
 export type TicketData = {

@@ -6,3 +6,4 @@ export { useExternalLink } from "./useExternalLink";
 export { useLinkedTasks } from "./useLinkedTasks";
 export { useQueriesWithClient } from "./useQueriesWithClient";
 export { useUnlinkTask } from "./useUnlinkTask";
+export { useLinkedAutoComment } from "./useLinkedAutoComment";
