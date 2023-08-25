@@ -5,6 +5,7 @@ describe("TaskCommentForm", () => {
     test("should return comment values", () => {
       expect(getInitValues()).toEqual({
         comment: "",
+        attachments: [],
       });
     });
   });

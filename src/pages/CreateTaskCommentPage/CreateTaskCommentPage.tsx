@@ -1,15 +1,20 @@
 import { useState, useCallback } from "react";
 import get from "lodash/get";
 import size from "lodash/size";
+import isEmpty from "lodash/isEmpty";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   useDeskproElements,
   useDeskproAppClient,
 } from "@deskpro/app-sdk";
 import { useSetTitle, useAsyncError } from "../../hooks";
-import { createTaskCommentService } from "../../services/meister-task";
+import { createTaskCommentService, createTaskAttachmentService } from "../../services/meister-task";
 import { CreateTaskComment } from "../../components";
-import { getValues } from "../../components/TaskCommentForm";
+import {
+  getValues,
+  getAttachments,
+  getAttachFormData,
+} from "../../components/TaskCommentForm";
 import type { FC } from "react";
 import type { Maybe } from "../../types";
 import type { MeisterTaskAPIError } from "../../services/meister-task/types";
@@ -26,14 +31,25 @@ const CreateTaskCommentPage: FC = () => {
     navigate(`/task/view/${taskId}`);
   }, [navigate, taskId]);
 
-  const onSubmit = useCallback((values: FormValidationSchema) => {
+  const onSubmit = useCallback((data: FormValidationSchema) => {
     if (!client || !taskId) {
       return Promise.resolve();
     }
 
+    const values = getValues(data);
+    const attachments = getAttachments(data);
+
     setError(null);
 
-    return createTaskCommentService(client, Number(taskId), getValues(values))
+    return Promise.all([
+      (isEmpty(values.text)
+        ? Promise.resolve()
+        : createTaskCommentService(client, Number(taskId), values)
+      ),
+      ...(!size(attachments) ? [Promise.resolve()] : attachments.map((attach) => {
+        return createTaskAttachmentService(client, Number(taskId), getAttachFormData(attach))
+      }))
+    ])
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
