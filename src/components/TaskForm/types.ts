@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { validationSchema } from "./utils";
 import type { Maybe, DateTime } from "../../types";
-import type { Task, Label, Person } from "../../services/meister-task/types";
+import type { Task, Label, Person, Project } from "../../services/meister-task/types";
 
 export type FormValidationSchema = z.infer<typeof validationSchema>;
 
@@ -15,7 +15,12 @@ export type TaskValues = {
 };
 
 export type Props = {
-  onSubmit: (values: FormValidationSchema) => Promise<void>,
+  onSubmit: (
+    values: FormValidationSchema,
+    project?: { id?: Project["id"], name?: Project["name"] },
+    assignee?: { id?: Person["id"], fullName?: string },
+    labels?: Array<{ id?: Label["id"], name?: Label["name"] }>,
+  ) => Promise<void>,
   onCancel?: () => void,
   task?: Task,
   labelIds?: Array<Label["id"]>,

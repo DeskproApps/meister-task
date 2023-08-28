@@ -22,7 +22,7 @@ describe("TaskForm", () => {
         section: 202,
         name: "Research",
         description: "### This is description\n\n* __item 1__\n* _item 2_\n* item 3\n\nand here link [This is a link](https://www.meistertask.com)\n\n---\n\nbest regards,\nilia makarov",
-        assignee: 107758481,
+        assignee: 401,
         dueDate: new Date("2023-08-31T09:00:00.000Z"),
         status: 1,
         labels: [305, 100500],

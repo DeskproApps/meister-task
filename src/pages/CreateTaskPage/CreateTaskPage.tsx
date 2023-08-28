@@ -16,11 +16,12 @@ import {
   useAsyncError,
   useLinkedAutoComment,
 } from "../../hooks";
+import { getEntityMetadata } from "../../utils";
 import { getTaskValues, getSectionId } from "../../components/TaskForm";
 import { CreateTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
-import type { MeisterTaskAPIError } from "../../services/meister-task/types";
+import type { MeisterTaskAPIError, Label, Person, Project } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskForm";
 
 const CreateTaskPage: FC = () => {
@@ -37,7 +38,12 @@ const CreateTaskPage: FC = () => {
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
-  const onSubmit = useCallback((values: FormValidationSchema) => {
+  const onSubmit = useCallback((
+    values: FormValidationSchema,
+    project?: { id?: Project["id"], name?: Project["name"] },
+    assignee?: { id?: Person["id"], fullName?: string },
+    labels?: Array<{ id?: Label["id"], name?: Label["name"] }>,
+  ) => {
     if (!client || !ticketId || isEmpty(values)) {
       return Promise.resolve();
     }
@@ -46,7 +52,7 @@ const CreateTaskPage: FC = () => {
 
     return createTaskService(client, getSectionId(values), getTaskValues(values))
       .then((task) => Promise.all([
-        setEntityService(client, ticketId, `${task.id}`),
+        setEntityService(client, ticketId, `${task.id}`, getEntityMetadata(task, project, assignee, labels)),
         addLinkComment(task.id),
         setSelectionState(task.id, true, "email"),
         setSelectionState(task.id, true, "note"),

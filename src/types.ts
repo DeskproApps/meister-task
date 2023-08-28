@@ -54,4 +54,17 @@ export type EventPayload =
   | { type: "unlink", task: Task }
 ;
 
+export type EntityMetadata = {
+  id: string,
+  name: string,
+  description: string,
+  projectId: string,
+  projectName: string,
+  sectionId: string,
+  sectionName: string,
+  assignee: { id: string, fullName: string },
+  labels: Array<{ id: string, name: string }>,
+  dueDate: string,
+};
+
 /** Entities */

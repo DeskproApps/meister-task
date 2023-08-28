@@ -1,4 +1,7 @@
+import { useCallback } from "react";
 import has from "lodash/has";
+import get from "lodash/get";
+import find from "lodash/find";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input, Stack } from "@deskpro/deskpro-ui";
@@ -15,7 +18,7 @@ import {
 } from "../common";
 import type { FC } from "react";
 import type { FormValidationSchema, Props } from "./types";
-import type { Project, Section, Person, TaskStatus } from "../../services/meister-task/types";
+import type { Project, Section, Person, Label as LabelType, TaskStatus } from "../../services/meister-task/types";
 
 const TaskForm: FC<Props> = ({
   task,
@@ -44,6 +47,23 @@ const TaskForm: FC<Props> = ({
     assigneeOptions,
   } = useFormDeps(watch("project"));
 
+  const onSubmitForm = useCallback((values: FormValidationSchema) => {
+    const selectedProject = find(projectOptions, { value: values.project });
+    const project = { id:  get(selectedProject, ["value"]), name: get(selectedProject, ["label"]) as Project["name"] };
+
+    const selectedAssignee = find(assigneeOptions, { value: values.assignee });
+    const assignee = !selectedAssignee
+      ? undefined
+      : { id: get(selectedAssignee, ["value"]), fullName: get(selectedAssignee, ["description"]) };
+
+    const selectedLabels = (get(values, ["labels"], []) || []) as Array<LabelType["id"]>;
+    const labels = labelOptions
+      .filter(({ value }) => selectedLabels.includes(value))
+      .map(({ value, description }) => ({ id: value, name: description as LabelType["name"] }));
+
+    return onSubmit(values, project, assignee, labels);
+  }, [onSubmit, projectOptions, assigneeOptions, labelOptions]);
+
   if (isLoading) {
     return (
       <LoadingSpinner/>
@@ -51,7 +71,7 @@ const TaskForm: FC<Props> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmitForm)}>
       {error && <ErrorBlock text={error}/>}
 
       <Label htmlFor="project" label="Project" required>

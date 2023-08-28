@@ -9,12 +9,14 @@ import {
 } from "@deskpro/app-sdk";
 import { useSetTitle, useAsyncError } from "../../hooks";
 import { useTask } from "./hooks";
+import { getEntityMetadata } from "../../utils";
+import { setEntityService } from "../../services/deskpro";
 import { updateTaskService } from "../../services/meister-task";
 import { getSectionId, getTaskValues } from "../../components/TaskForm";
 import { EditTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
-import type { MeisterTaskAPIError } from "../../services/meister-task/types";
+import type { MeisterTaskAPIError, Label, Person, Project } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskForm";
 
 const EditTaskPage: FC = () => {
@@ -35,7 +37,12 @@ const EditTaskPage: FC = () => {
     navigate(`/task/view/${taskId}`)
   }, [navigate, taskId]);
 
-  const onSubmit = useCallback((values: FormValidationSchema) => {
+  const onSubmit = useCallback((
+    values: FormValidationSchema,
+    project?: { id?: Project["id"], name?: Project["name"] },
+    assignee?: { id?: Person["id"], fullName?: string },
+    labels?: Array<{ id?: Label["id"], name?: Label["name"] }>,
+  ) => {
     if (!client || !taskId || !ticketId) {
       return Promise.resolve();
     }
@@ -46,6 +53,12 @@ const EditTaskPage: FC = () => {
       ...getTaskValues(values),
       section_id: getSectionId(values),
     })
+      .then((task) => setEntityService(
+        client,
+        ticketId,
+        `${task.id}`,
+        getEntityMetadata(task, project, assignee, labels),
+      ))
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])

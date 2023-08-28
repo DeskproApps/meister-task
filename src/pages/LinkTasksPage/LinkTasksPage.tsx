@@ -1,6 +1,7 @@
 import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import get from "lodash/get";
+import find from "lodash/find";
 import size from "lodash/size";
 import cloneDeep from "lodash/cloneDeep";
 import {
@@ -15,7 +16,7 @@ import {
   useAsyncError,
   useLinkedAutoComment,
 } from "../../hooks";
-import { filterTasks } from "../../utils";
+import { filterTasks, getEntityMetadata } from "../../utils";
 import { useSearchTasks } from "./hooks";
 import { LinkTasks } from "../../components";
 import type { FC } from "react";
@@ -63,10 +64,17 @@ const LinkTasksPage: FC = () => {
       return;
     }
 
+    const project = find(projects, { id: selectedProject });
+
     setIsSubmitting(true);
 
     return Promise.all([
-      ...selectedTasks.map((task) => setEntityService(client, ticketId, `${task.id}`)),
+      ...selectedTasks.map((task) => setEntityService(
+        client,
+        ticketId,
+        `${task.id}`,
+        getEntityMetadata(task, project),
+      )),
       ...selectedTasks.map((task) => addLinkComment(task.id)),
       ...selectedTasks.map((task) => setSelectionState(task.id, true, "email")),
       ...selectedTasks.map((task) => setSelectionState(task.id, true, "note")),
@@ -76,7 +84,17 @@ const LinkTasksPage: FC = () => {
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, selectedTasks, addLinkComment, setSelectionState, navigate, asyncErrorHandler]);
+  }, [
+    client,
+    navigate,
+    ticketId,
+    projects,
+    selectedTasks,
+    addLinkComment,
+    selectedProject,
+    setSelectionState,
+    asyncErrorHandler,
+  ]);
 
   useSetTitle("Link Tasks");
 
