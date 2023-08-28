@@ -18,3 +18,4 @@ export { updateTaskService } from "./updateTaskService";
 export { updateChecklistItemService } from "./updateChecklistItemService";
 export { createTaskCommentService } from "./createTaskCommentService";
 export { createTaskAttachmentService } from "./createTaskAttachmentService";
+export { revokeAccessTokenService } from "./revokeAccessTokenService";
