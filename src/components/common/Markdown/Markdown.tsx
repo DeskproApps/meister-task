@@ -1,6 +1,7 @@
 import showdown from "showdown";
 import styled from "styled-components";
 import { TSpan } from "@deskpro/deskpro-ui";
+import { dpNormalize } from "../../../styles";
 import type { FC } from "react";
 
 type Props = {
@@ -17,26 +18,7 @@ const converter = new showdown.Converter({
 
 const MarkdownStyled = styled(TSpan)`
   width: 100%;
-
-  p {
-    margin-top: 0;
-    white-space: pre-wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  p:first-child {
-    margin-top: 0;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-
-  a, a:hover {
-    color: ${({ theme }) => theme.colors.cyan100};
-  }
+  ${dpNormalize}
 `;
 
 const Markdown: FC<Props> = ({ text }) => (

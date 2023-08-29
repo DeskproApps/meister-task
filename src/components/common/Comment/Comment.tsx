@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ReactTimeAgo from "react-time-ago";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { Avatar, TSpan, P11, Stack } from "@deskpro/deskpro-ui";
+import { dpNormalize } from "../../../styles";
 import type { FC } from "react";
 import type { AnyIcon } from "@deskpro/deskpro-ui";
 import type { Maybe } from "../../../types";
@@ -19,23 +20,7 @@ const Body = styled(TSpan)`
   width: calc(100% - 35px);
   white-space: pre-line;
 
-  p {
-    white-space: pre-wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin-top: 0;
-  }
-
-  p:first-child,
-  ol:first-child,
-  ul:first-child {
-    margin-top: 0;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-  }
+  ${dpNormalize}
 `;
 
 type Props = {
