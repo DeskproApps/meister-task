@@ -34,6 +34,9 @@ export type Request = <T>(
 export type Settings = {
   client_id?: string,
   add_comment_when_linking?: boolean,
+  default_comment_on_ticket_reply?: boolean,
+  default_comment_on_ticket_note?: boolean,
+  add_deskpro_label?: boolean,
 };
 
 export type TicketData = {

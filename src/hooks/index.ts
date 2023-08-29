@@ -8,3 +8,4 @@ export { useQueriesWithClient } from "./useQueriesWithClient";
 export { useUnlinkTask } from "./useUnlinkTask";
 export { useLinkedAutoComment } from "./useLinkedAutoComment";
 export { useReplyBox, ReplyBoxProvider } from "./useReplyBox";
+export { useDeskproLabel } from "./useDeskproLabel";

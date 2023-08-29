@@ -14,6 +14,7 @@ import {
   useSetTitle,
   useReplyBox,
   useAsyncError,
+  useDeskproLabel,
   useLinkedAutoComment,
 } from "../../hooks";
 import { getEntityMetadata } from "../../utils";
@@ -29,6 +30,7 @@ const CreateTaskPage: FC = () => {
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addLinkComment } = useLinkedAutoComment();
+  const { addDeskproLabel } = useDeskproLabel();
   const { setSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
@@ -54,6 +56,7 @@ const CreateTaskPage: FC = () => {
       .then((task) => Promise.all([
         setEntityService(client, ticketId, `${task.id}`, getEntityMetadata(task, project, assignee, labels)),
         addLinkComment(task.id),
+        addDeskproLabel(task),
         setSelectionState(task.id, true, "email"),
         setSelectionState(task.id, true, "note"),
       ]))
@@ -68,7 +71,15 @@ const CreateTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, ticketId, addLinkComment, setSelectionState, asyncErrorHandler, navigate]);
+  }, [
+    client,
+    ticketId,
+    navigate,
+    addLinkComment,
+    addDeskproLabel,
+    setSelectionState,
+    asyncErrorHandler,
+  ]);
 
   useSetTitle("Link Tasks");
 

@@ -23,7 +23,12 @@ global.React = React;
 
 const context = {
   type: "ticket",
-  settings: {},
+  settings: {
+    add_comment_when_linking: false,
+    default_comment_on_ticket_reply: true,
+    default_comment_on_ticket_note: true,
+    add_deskpro_label: true,
+  },
   data: {
     ticket: {
       id: "215",

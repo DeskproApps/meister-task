@@ -3,7 +3,7 @@ import type { IDeskproClient } from "@deskpro/app-sdk";
 import type { TaskLabelRelation } from "./types";
 
 const removeLabelFromTaskService = (client: IDeskproClient, labelId: TaskLabelRelation["id"]) => {
-  return baseRequest(client, {
+  return baseRequest<void>(client, {
     url: `/task_labels/${labelId}`,
     method: "DELETE",
   });

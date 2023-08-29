@@ -14,6 +14,7 @@ import {
   useSetTitle,
   useReplyBox,
   useAsyncError,
+  useDeskproLabel,
   useLinkedAutoComment,
 } from "../../hooks";
 import { filterTasks, getEntityMetadata } from "../../utils";
@@ -29,6 +30,7 @@ const LinkTasksPage: FC = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { addLinkComment } = useLinkedAutoComment();
   const { setSelectionState } = useReplyBox();
+  const { addDeskproLabel } = useDeskproLabel();
   const { asyncErrorHandler } = useAsyncError();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -76,6 +78,7 @@ const LinkTasksPage: FC = () => {
         getEntityMetadata(task, project),
       )),
       ...selectedTasks.map((task) => addLinkComment(task.id)),
+      ...selectedTasks.map((task) => addDeskproLabel(task)),
       ...selectedTasks.map((task) => setSelectionState(task.id, true, "email")),
       ...selectedTasks.map((task) => setSelectionState(task.id, true, "note")),
     ])
@@ -92,6 +95,7 @@ const LinkTasksPage: FC = () => {
     selectedTasks,
     addLinkComment,
     selectedProject,
+    addDeskproLabel,
     setSelectionState,
     asyncErrorHandler,
   ]);

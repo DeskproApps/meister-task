@@ -23,3 +23,4 @@ export { addLabelToTaskService } from "./addLabelToTaskService";
 export { removeLabelFromTaskService } from "./removeLabelFromTaskService";
 export { getTaskLabelRelationsService } from "./getTaskLabelRelationsService";
 export { updateTaskLabelsService } from "./updateTaskLabelsService";
+export { createProjectLabelService } from "./createProjectLabelService";

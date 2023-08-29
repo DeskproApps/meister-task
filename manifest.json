@@ -52,7 +52,7 @@
       "type": "boolean",
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 40
+      "order": 50
     },
     "default_comment_on_ticket_note": {
       "title": "Ticket note as comment",
@@ -60,7 +60,16 @@
       "type": "boolean",
       "isRequired": false,
       "isBackendOnly": false,
-      "order": 50
+      "order": 60
+    },
+    "add_deskpro_label": {
+      "title": "Add \"Deskpro\" label when creating or linking Task",
+      "description": "Automatically adding a label to indicate in MeisterTask that the task is currently linked to a Deskpro ticket",
+      "type": "boolean",
+      "default": true,
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 70
     }
   },
   "proxy": {
