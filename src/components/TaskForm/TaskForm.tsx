@@ -156,30 +156,28 @@ const TaskForm: FC<Props> = ({
         />
       </Label>
 
-      {!isEditMode && (
-        <Label htmlFor="labels" label="Labels">
-          <Select
-            id="labels"
-            value={watch("labels")}
-            showInternalSearch
-            options={labelOptions}
-            error={has(errors, ["labels", "message"])}
-            closeOnSelect={false}
-            onChange={(o) => {
-              const labels = watch("labels");
+      <Label htmlFor="labels" label="Labels">
+        <Select
+          id="labels"
+          value={watch("labels")}
+          showInternalSearch
+          options={labelOptions}
+          error={has(errors, ["labels", "message"])}
+          closeOnSelect={false}
+          onChange={(o) => {
+            const labels = watch("labels");
 
-              if (o.value) {
-                const selectedLabels = Array.isArray(labels) ? labels : [];
-                const newValue = selectedLabels.includes(o.value)
-                  ? selectedLabels.filter((label) => label !== o.value)
-                  : [...selectedLabels, o.value];
+            if (o.value) {
+              const selectedLabels = Array.isArray(labels) ? labels : [];
+              const newValue = selectedLabels.includes(o.value)
+                ? selectedLabels.filter((label) => label !== o.value)
+                : [...selectedLabels, o.value];
 
-                setValue("labels", newValue);
-              }
-            }}
-          />
-        </Label>
-      )}
+              setValue("labels", newValue);
+            }
+          }}
+        />
+      </Label>
 
       <Stack justify="space-between">
         <Button

@@ -3,13 +3,14 @@ import get from "lodash/get";
 import trim from "lodash/trim";
 import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
+import difference from "lodash/difference";
 import formatISO from "date-fns/formatISO";
 import { z } from "zod";
 import { getOption, getFullName } from "../../utils";
 import { taskStatus } from "../../services/meister-task";
 import { Member, Tag } from "../common";
 import type { Option } from "../../types";
-import type { Task, Person, Label, TaskStatus, Section } from "../../services/meister-task/types";
+import type { Task, Person, Label, TaskStatus, Section, TaskLabelRelation } from "../../services/meister-task/types";
 import type { FormValidationSchema, TaskValues } from "./types";
 
 const validationSchema = z.object({
@@ -110,6 +111,32 @@ const getLabelOptions = (labels?: Label[]): Array<Option<Label["id"]>> => {
   });
 };
 
+const getLabelsToUpdate = (
+  taskLabelRelations: TaskLabelRelation[],
+  values: FormValidationSchema,
+): {
+  add: Array<Label["id"]>,
+  rem: Array<TaskLabelRelation["id"]>,
+} => {
+  const updatedLabels: Array<Label["id"]> = get(values, ["labels"], []) || [];
+
+  if (!size(updatedLabels)) {
+    return { add: [], rem: [] };
+  }
+
+  const add = difference(updatedLabels, taskLabelRelations.map(({ label_id }) => label_id));
+  const remove = taskLabelRelations.map(({ id, label_id }) => {
+      if (!updatedLabels.includes(label_id)) {
+        return id;
+      }
+    }).filter(Boolean) as Array<TaskLabelRelation["id"]>;
+
+  return {
+    add: add,
+    rem: remove,
+  };
+};
+
 export {
   getOptions,
   getSectionId,
@@ -119,4 +146,5 @@ export {
   getPersonOptions,
   getStatusOptions,
   validationSchema,
+  getLabelsToUpdate,
 };

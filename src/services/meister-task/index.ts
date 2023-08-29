@@ -19,3 +19,7 @@ export { updateChecklistItemService } from "./updateChecklistItemService";
 export { createTaskCommentService } from "./createTaskCommentService";
 export { createTaskAttachmentService } from "./createTaskAttachmentService";
 export { revokeAccessTokenService } from "./revokeAccessTokenService";
+export { addLabelToTaskService } from "./addLabelToTaskService";
+export { removeLabelFromTaskService } from "./removeLabelFromTaskService";
+export { getTaskLabelRelationsService } from "./getTaskLabelRelationsService";
+export { updateTaskLabelsService } from "./updateTaskLabelsService";

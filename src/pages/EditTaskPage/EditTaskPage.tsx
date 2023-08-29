@@ -11,8 +11,8 @@ import { useSetTitle, useAsyncError } from "../../hooks";
 import { useTask } from "./hooks";
 import { getEntityMetadata } from "../../utils";
 import { setEntityService } from "../../services/deskpro";
-import { updateTaskService } from "../../services/meister-task";
-import { getSectionId, getTaskValues } from "../../components/TaskForm";
+import { updateTaskService, updateTaskLabelsService } from "../../services/meister-task";
+import { getSectionId, getTaskValues, getLabelsToUpdate } from "../../components/TaskForm";
 import { EditTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
@@ -26,7 +26,7 @@ const EditTaskPage: FC = () => {
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
   const { asyncErrorHandler } = useAsyncError();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
-  const { isLoading, task, labelIds } = useTask(Number(taskId));
+  const { isLoading, task, labelIds, labelRelations } = useTask(Number(taskId));
   const ticketId = get(context, ["data", "ticket", "id"]);
 
   const onCancel = useCallback(() => {
@@ -53,12 +53,15 @@ const EditTaskPage: FC = () => {
       ...getTaskValues(values),
       section_id: getSectionId(values),
     })
-      .then((task) => setEntityService(
-        client,
-        ticketId,
-        `${task.id}`,
-        getEntityMetadata(task, project, assignee, labels),
-      ))
+      .then((task) => Promise.all([
+        setEntityService(
+          client,
+          ticketId,
+          `${task.id}`,
+          getEntityMetadata(task, project, assignee, labels),
+        ),
+        updateTaskLabelsService(client, task.id, getLabelsToUpdate(labelRelations, values)),
+      ]))
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
@@ -70,7 +73,7 @@ const EditTaskPage: FC = () => {
           asyncErrorHandler(err);
         }
       });
-  }, [client, taskId, ticketId, navigate, asyncErrorHandler]);
+  }, [client, taskId, ticketId, navigate, asyncErrorHandler, labelRelations]);
 
   useSetTitle("Edit Task");
 
