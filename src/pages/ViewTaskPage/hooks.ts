@@ -87,7 +87,7 @@ const useTask: UseTask = (taskId) => {
       checklists,
       attachments,
       checklistItems,
-    ].some(({ isFetching }) => isFetching),
+    ].some(({ isLoading }) => isLoading),
     task: get(task, ["data"], {}) as Task,
     projects: (get(projects, ["data"], []) || []) as Project[],
     comments: (get(comments, ["data"], []) || []),

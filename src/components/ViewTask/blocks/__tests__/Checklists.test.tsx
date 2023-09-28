@@ -18,6 +18,7 @@ describe("ViewTask", () => {
         <Checklists
           checklists={mockTaskChecklists}
           checklistItems={mockTaskChecklistItems as never}
+          onCompleteChecklist={jest.fn()}
         />
       ), { wrappers: { theme: true } });
 

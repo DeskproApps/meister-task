@@ -25,3 +25,8 @@ export const AUTH_URL = "https://www.mindmeister.com/oauth2";
 export const HTML_URL = "https://www.meistertask.com/app";
 
 export const SCOPES = ["userinfo.email", "userinfo.profile", "meistertask"];
+
+export const DESKPRO_LABEL = {
+  name: "Deskpro",
+  color: "00aaff",
+};

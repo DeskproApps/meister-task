@@ -1,5 +1,6 @@
 import { useMemo, useState, useCallback } from "react";
 import get from "lodash/get";
+import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,18 +10,28 @@ import {
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
 import { createTaskService } from "../../services/meister-task";
-import { useSetTitle, useAsyncError } from "../../hooks";
+import {
+  useSetTitle,
+  useReplyBox,
+  useAsyncError,
+  useDeskproLabel,
+  useLinkedAutoComment,
+} from "../../hooks";
+import { getEntityMetadata } from "../../utils";
 import { getTaskValues, getSectionId } from "../../components/TaskForm";
 import { CreateTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
-import type { MeisterTaskAPIError } from "../../services/meister-task/types";
+import type { MeisterTaskAPIError, Label, Person, Project } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskForm";
 
 const CreateTaskPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addLinkComment } = useLinkedAutoComment();
+  const { addDeskproLabel } = useDeskproLabel();
+  const { setSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [error, setError] = useState<Maybe<string|string[]>>(null);
   const ticketId = useMemo(() => get(context, ["data", "ticket", "id"]), [context]);
@@ -29,7 +40,12 @@ const CreateTaskPage: FC = () => {
 
   const onCancel = useCallback(() => navigate("/home"), [navigate]);
 
-  const onSubmit = useCallback((values: FormValidationSchema) => {
+  const onSubmit = useCallback((
+    values: FormValidationSchema,
+    project?: { id?: Project["id"], name?: Project["name"] },
+    assignee?: { id?: Person["id"], fullName?: string },
+    labels?: Array<{ id?: Label["id"], name?: Label["name"] }>,
+  ) => {
     if (!client || !ticketId || isEmpty(values)) {
       return Promise.resolve();
     }
@@ -37,19 +53,33 @@ const CreateTaskPage: FC = () => {
     setError(null);
 
     return createTaskService(client, getSectionId(values), getTaskValues(values))
-      .then((task) => setEntityService(client, ticketId, `${task.id}`))
+      .then((task) => Promise.all([
+        setEntityService(client, ticketId, `${task.id}`, getEntityMetadata(task, project, assignee, labels)),
+        addLinkComment(task.id),
+        addDeskproLabel(task),
+        setSelectionState(task.id, true, "email"),
+        setSelectionState(task.id, true, "note"),
+      ]))
       .then(() => navigate("/home"))
       .catch((err) => {
         const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
           .map(({ message }) => message);
 
-        if (errors) {
+        if (size(errors)) {
           setError(errors);
         } else {
           asyncErrorHandler(err);
         }
       });
-  }, [client, ticketId, asyncErrorHandler, navigate]);
+  }, [
+    client,
+    ticketId,
+    navigate,
+    addLinkComment,
+    addDeskproLabel,
+    setSelectionState,
+    asyncErrorHandler,
+  ]);
 
   useSetTitle("Link Tasks");
 

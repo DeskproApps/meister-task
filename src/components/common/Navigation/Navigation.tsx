@@ -17,8 +17,8 @@ const Navigation: FC<Props> = ({
 }) => (
   <TwoButtonGroup
     selected={selected}
-    oneLabel="Find Issue"
-    twoLabel="Create Issue"
+    oneLabel="Find Task"
+    twoLabel="Create Task"
     oneIcon={faSearch}
     twoIcon={faPlus}
     oneOnClick={onOneNavigate}

@@ -7,6 +7,9 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { deleteEntityService } from "../services/deskpro";
+import { useLinkedAutoComment } from "./useLinkedAutoComment";
+import { useDeskproLabel } from "./useDeskproLabel";
+import { useReplyBox } from "./useReplyBox";
 import { useAsyncError } from "./useAsyncError";
 import type { TicketContext } from "../types";
 import type { Task } from "../services/meister-task/types";
@@ -20,6 +23,9 @@ const useUnlinkTask = (): Result => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addUnlinkComment } = useLinkedAutoComment();
+  const { removeDeskproLabel } = useDeskproLabel();
+  const { deleteSelectionState } = useReplyBox();
   const { asyncErrorHandler } = useAsyncError();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const ticketId = get(context, ["data", "ticket", "id"]);
@@ -31,13 +37,27 @@ const useUnlinkTask = (): Result => {
 
     setIsLoading(true);
 
-    deleteEntityService(client, ticketId, `${task.id}`)
+    Promise.all([
+      deleteEntityService(client, ticketId, `${task.id}`),
+      addUnlinkComment(task.id),
+      removeDeskproLabel(task),
+      deleteSelectionState(task.id, "note"),
+      deleteSelectionState(task.id, "email"),
+    ])
       .then(() => {
         setIsLoading(false);
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, navigate, asyncErrorHandler]);
+  }, [
+    client,
+    ticketId,
+    navigate,
+    addUnlinkComment,
+    asyncErrorHandler,
+    removeDeskproLabel,
+    deleteSelectionState,
+  ]);
 
   return { isLoading, unlink };
 };

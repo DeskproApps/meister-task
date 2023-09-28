@@ -15,10 +15,12 @@ import {
   HomePage,
   LoginPage,
   ViewTaskPage,
+  EditTaskPage,
   LinkTasksPage,
   CreateTaskPage,
   LoadingAppPage,
   AdminCallbackPage,
+  CreateTaskCommentPage,
 } from "./pages";
 import type { FC } from "react";
 import type { EventPayload } from "./types";
@@ -72,6 +74,8 @@ const App: FC = () => {
         <Route path="/home" element={<HomePage/>}/>)
         <Route path="/task/view/:taskId" element={<ViewTaskPage/>}/>
         <Route path="/task/create" element={<CreateTaskPage/>}/>)
+        <Route path="/task/edit/:taskId" element={<EditTaskPage/>}/>
+        <Route path="/task/view/:taskId/comments/create" element={<CreateTaskCommentPage/>} />
         <Route index element={<LoadingAppPage/>} />
       </Routes>
       {!isAdmin && (<><br/><br/><br/></>)}

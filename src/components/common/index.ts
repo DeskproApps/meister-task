@@ -18,3 +18,5 @@ export { Comment } from "./Comment";
 export { Navigation } from "./Navigation";
 export { TextArea } from "./TextArea";
 export { DateInput } from "./DateInput";
+export { ChecklistItem } from "./ChecklistItem";
+export { Attach } from "./Attach";

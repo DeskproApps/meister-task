@@ -142,3 +142,9 @@ export type Task =  {
   created_at: DateTime,
   updated_at: DateTime,
 };
+
+export type TaskLabelRelation = {
+  id: number,
+  label_id: Label["id"],
+  task_id: Task["id"],
+};

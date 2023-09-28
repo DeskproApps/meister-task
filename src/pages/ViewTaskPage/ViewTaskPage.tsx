@@ -1,15 +1,23 @@
-import { useParams } from "react-router-dom";
+import { useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   LoadingSpinner,
   useDeskproElements,
+  useDeskproAppClient,
 } from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
+import { queryClient } from "../../query";
+import { updateChecklistItemService } from "../../services/meister-task";
+import { useSetTitle, useAsyncError } from "../../hooks";
 import { useTask } from "./hooks";
 import { ViewTask } from "../../components";
 import type { FC } from "react";
+import type { ChecklistItem, ChecklistItemStatus } from "../../services/meister-task/types";
 
 const ViewTaskPage: FC = () => {
+  const navigate = useNavigate();
   const { taskId } = useParams();
+  const { client } = useDeskproAppClient();
+  const { asyncErrorHandler } = useAsyncError();
   const {
     task,
     labels,
@@ -22,6 +30,23 @@ const ViewTaskPage: FC = () => {
     checklistItems,
   } = useTask(Number(taskId));
 
+  const onCompleteChecklist = useCallback((
+    itemId: ChecklistItem["id"],
+    status: ChecklistItemStatus,
+  ) => {
+    if (!client) {
+      return Promise.resolve();
+    }
+
+    return updateChecklistItemService(client, itemId, status)
+      .then(() => queryClient.invalidateQueries())
+      .catch(asyncErrorHandler);
+  }, [client, asyncErrorHandler]);
+
+  const onNavigateToAddComment = useCallback(() => {
+    navigate(`/task/view/${taskId}/comments/create`);
+  }, [navigate, taskId]);
+
   useSetTitle(task.token);
 
   useDeskproElements(({ clearElements, registerElement }) => {
@@ -31,6 +56,10 @@ const ViewTaskPage: FC = () => {
       type: "home_button",
       payload: { type: "changePage", path: "/home" },
     });
+    registerElement("edit", {
+      type: "edit_button",
+      payload: { type: "changePage", path: `/task/edit/${taskId}` }
+    });
     registerElement("menu", {
       type: "menu",
       items: [{
@@ -38,7 +67,7 @@ const ViewTaskPage: FC = () => {
         payload: { type: "unlink", task },
       }],
     });
-  }, [task]);
+  }, [taskId, task]);
 
   if (isLoading) {
     return (
@@ -56,6 +85,8 @@ const ViewTaskPage: FC = () => {
       attachments={attachments}
       checklists={checklists}
       checklistItems={checklistItems}
+      onCompleteChecklist={onCompleteChecklist}
+      onNavigateToAddComment={onNavigateToAddComment}
     />
   );
 };

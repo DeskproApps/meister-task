@@ -5,3 +5,5 @@ export { LinkTasksPage } from "./LinkTasksPage";
 export { HomePage } from "./HomePage";
 export { ViewTaskPage } from "./ViewTaskPage";
 export { CreateTaskPage } from "./CreateTaskPage";
+export { EditTaskPage } from "./EditTaskPage";
+export { CreateTaskCommentPage } from "./CreateTaskCommentPage";

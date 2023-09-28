@@ -33,6 +33,10 @@ export type Request = <T>(
 /** Deskpro types */
 export type Settings = {
   client_id?: string,
+  add_comment_when_linking?: boolean,
+  default_comment_on_ticket_reply?: boolean,
+  default_comment_on_ticket_note?: boolean,
+  add_deskpro_label?: boolean,
 };
 
 export type TicketData = {
@@ -52,5 +56,18 @@ export type EventPayload =
   | { type: "logout" }
   | { type: "unlink", task: Task }
 ;
+
+export type EntityMetadata = {
+  id: string,
+  name: string,
+  description: string,
+  projectId: string,
+  projectName: string,
+  sectionId: string,
+  sectionName: string,
+  assignee: { id: string, fullName: string },
+  labels: Array<{ id: string, name: string }>,
+  dueDate: string,
+};
 
 /** Entities */

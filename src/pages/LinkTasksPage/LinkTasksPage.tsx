@@ -1,6 +1,7 @@
 import { useMemo, useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import get from "lodash/get";
+import find from "lodash/find";
 import size from "lodash/size";
 import cloneDeep from "lodash/cloneDeep";
 import {
@@ -9,8 +10,14 @@ import {
   useDeskproLatestAppContext,
 } from "@deskpro/app-sdk";
 import { setEntityService } from "../../services/deskpro";
-import { useSetTitle, useAsyncError } from "../../hooks";
-import { filterTasks } from "../../utils";
+import {
+  useSetTitle,
+  useReplyBox,
+  useAsyncError,
+  useDeskproLabel,
+  useLinkedAutoComment,
+} from "../../hooks";
+import { filterTasks, getEntityMetadata } from "../../utils";
 import { useSearchTasks } from "./hooks";
 import { LinkTasks } from "../../components";
 import type { FC } from "react";
@@ -21,6 +28,9 @@ const LinkTasksPage: FC = () => {
   const navigate = useNavigate();
   const { client } = useDeskproAppClient();
   const { context } = useDeskproLatestAppContext() as { context: TicketContext };
+  const { addLinkComment } = useLinkedAutoComment();
+  const { setSelectionState } = useReplyBox();
+  const { addDeskproLabel } = useDeskproLabel();
   const { asyncErrorHandler } = useAsyncError();
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -56,17 +66,39 @@ const LinkTasksPage: FC = () => {
       return;
     }
 
+    const project = find(projects, { id: selectedProject });
+
     setIsSubmitting(true);
 
     return Promise.all([
-      ...selectedTasks.map((task) => setEntityService(client, ticketId, `${task.id}`)),
+      ...selectedTasks.map((task) => setEntityService(
+        client,
+        ticketId,
+        `${task.id}`,
+        getEntityMetadata(task, project),
+      )),
+      ...selectedTasks.map((task) => addLinkComment(task.id)),
+      ...selectedTasks.map((task) => addDeskproLabel(task)),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "email")),
+      ...selectedTasks.map((task) => setSelectionState(task.id, true, "note")),
     ])
       .then(() => {
         setIsSubmitting(false);
         navigate("/home");
       })
       .catch(asyncErrorHandler);
-  }, [client, ticketId, selectedTasks, navigate, asyncErrorHandler]);
+  }, [
+    client,
+    navigate,
+    ticketId,
+    projects,
+    selectedTasks,
+    addLinkComment,
+    selectedProject,
+    addDeskproLabel,
+    setSelectionState,
+    asyncErrorHandler,
+  ]);
 
   useSetTitle("Link Tasks");
 

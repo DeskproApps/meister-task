@@ -5,3 +5,5 @@ export { LinkTasks } from "./LinkTasks";
 export { Home } from "./Home";
 export { ViewTask } from "./ViewTask";
 export { CreateTask } from "./CreateTask";
+export { EditTask } from "./EditTask";
+export { CreateTaskComment } from "./CreateTaskComment";

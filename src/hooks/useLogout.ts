@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import noop from "lodash/noop";
 import { useDeskproAppClient } from "@deskpro/app-sdk";
 import { removeAccessTokenService } from "../services/deskpro";
+import { revokeAccessTokenService } from "../services/meister-task";
 
 export type Result = {
   isLoading: boolean,
@@ -22,6 +23,7 @@ const useLogout = (): Result => {
     setIsLoading(true);
 
     return removeAccessTokenService(client)
+      .then(() => revokeAccessTokenService(client))
       .catch(noop)
       .finally(() => {
         setIsLoading(false);

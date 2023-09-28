@@ -11,6 +11,7 @@ import type {
   Checklist,
   Attachment,
   ChecklistItem,
+  ChecklistItemStatus,
 } from "../../services/meister-task/types";
 
 type Props = {
@@ -22,6 +23,8 @@ type Props = {
   attachments: Attachment[],
   checklists: Checklist[],
   checklistItems: ChecklistItem[],
+  onNavigateToAddComment: () => void,
+  onCompleteChecklist: (itemId: ChecklistItem["id"], status: ChecklistItemStatus,) => Promise<void>,
 };
 
 const ViewTask: FC<Props> = ({
@@ -33,6 +36,8 @@ const ViewTask: FC<Props> = ({
   checklists,
   attachments,
   checklistItems,
+  onCompleteChecklist,
+  onNavigateToAddComment,
 }) => {
   return (
     <>
@@ -49,13 +54,21 @@ const ViewTask: FC<Props> = ({
       <HorizontalDivider/>
 
       <Container>
-        <Checklists checklists={checklists} checklistItems={checklistItems} />
+        <Checklists
+          checklists={checklists}
+          checklistItems={checklistItems}
+          onCompleteChecklist={onCompleteChecklist}
+        />
       </Container>
 
       <HorizontalDivider/>
 
       <Container>
-        <Comments comments={comments} persons={persons} />
+        <Comments
+          persons={persons}
+          comments={comments}
+          onNavigateToAddComment={onNavigateToAddComment}
+        />
       </Container>
     </>
   );
