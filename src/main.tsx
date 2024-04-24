@@ -15,16 +15,17 @@ import "tippy.js/dist/tippy.css";
 import "simplebar/dist/simplebar.min.css";
 import "@deskpro/deskpro-ui/dist/deskpro-ui.css";
 import "@deskpro/deskpro-ui/dist/deskpro-custom-icons.css";
+import "iframe-resizer/js/iframeResizer.contentWindow.js";
 
 TimeAgo.addDefaultLocale(en);
 
-const root = ReactDOM.createRoot(document.getElementById('root') as Element);
-root.render((
+const root = ReactDOM.createRoot(document.getElementById("root") as Element);
+root.render(
   <React.StrictMode>
     <DeskproAppProvider>
       <HashRouter>
         <QueryClientProvider client={queryClient}>
-          <Suspense fallback={<LoadingSpinner/>}>
+          <Suspense fallback={<LoadingSpinner />}>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
               <ReplyBoxProvider>
                 <App />
@@ -35,4 +36,4 @@ root.render((
       </HashRouter>
     </DeskproAppProvider>
   </React.StrictMode>
-));
+);
