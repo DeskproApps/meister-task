@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import get from "lodash/get";
 import size from "lodash/size";
 import isEmpty from "lodash/isEmpty";
 import { useParams, useNavigate } from "react-router-dom";
@@ -8,6 +7,7 @@ import {
   useDeskproAppClient,
 } from "@deskpro/app-sdk";
 import { useSetTitle, useAsyncError } from "../../hooks";
+import { getError } from "../../utils";
 import { createTaskCommentService, createTaskAttachmentService } from "../../services/meister-task";
 import { CreateTaskComment } from "../../components";
 import {
@@ -17,7 +17,6 @@ import {
 } from "../../components/TaskCommentForm";
 import type { FC } from "react";
 import type { Maybe } from "../../types";
-import type { MeisterTaskAPIError } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskCommentForm";
 
 const CreateTaskCommentPage: FC = () => {
@@ -52,8 +51,7 @@ const CreateTaskCommentPage: FC = () => {
     ])
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
-        const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
-          .map(({ message }) => message);
+        const errors = getError(err?.data);
 
         if (size(errors)) {
           setError(errors);

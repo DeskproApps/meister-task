@@ -6,6 +6,8 @@ const queryClient = new QueryClient({
       suspense: false,
       useErrorBoundary: true,
       refetchOnWindowFocus: false,
+      retry: 1,
+      retryDelay: 1500,
     },
   },
 });

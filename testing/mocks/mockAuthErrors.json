@@ -1,0 +1,7 @@
+{
+  "error": {
+    "type": "errorType",
+    "message": "Error message",
+    "details": "OPTIONAL error details"
+  }
+}

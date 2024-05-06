@@ -1,0 +1,8 @@
+{
+  "errors": [
+    {
+      "message": "Access to project with ID 123 forbidden",
+      "status": 403
+    }
+  ]
+}

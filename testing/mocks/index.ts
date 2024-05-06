@@ -11,3 +11,5 @@ export { default as mockPersons } from "./mockPersons.json";
 export { default as mockProjectLabels } from "./mockProjectLabels.json";
 export { default as mockLabel } from "./mockLabel.json";
 export { default as mockTaskLabelRelation } from "./mockTaskLabelRelation.json";
+export { default as mockAPIErrors } from "./mockAPIErrors.json";
+export { default as mockAuthErrors } from "./mockAuthErrors.json";

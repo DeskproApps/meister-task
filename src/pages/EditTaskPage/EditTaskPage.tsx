@@ -9,14 +9,14 @@ import {
 } from "@deskpro/app-sdk";
 import { useSetTitle, useAsyncError } from "../../hooks";
 import { useTask } from "./hooks";
-import { getEntityMetadata } from "../../utils";
+import { getEntityMetadata, getError } from "../../utils";
 import { setEntityService } from "../../services/deskpro";
 import { updateTaskService, updateTaskLabelsService } from "../../services/meister-task";
 import { getSectionId, getTaskValues, getLabelsToUpdate } from "../../components/TaskForm";
 import { EditTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
-import type { MeisterTaskAPIError, Label, Person, Project } from "../../services/meister-task/types";
+import type { Label, Person, Project } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskForm";
 
 const EditTaskPage: FC = () => {
@@ -64,8 +64,7 @@ const EditTaskPage: FC = () => {
       ]))
       .then(() => navigate(`/task/view/${taskId}`))
       .catch((err) => {
-        const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
-          .map(({ message }) => message);
+        const errors = getError(err?.data);
 
         if (errors) {
           setError(errors);

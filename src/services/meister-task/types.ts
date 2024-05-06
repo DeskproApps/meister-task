@@ -7,12 +7,24 @@ export type SectionStatus = typeof sectionStatus[keyof typeof sectionStatus];
 
 export type ChecklistItemStatus = typeof checklistItemStatus[keyof typeof checklistItemStatus]
 
-export type MeisterTaskAPIError = {
-  errors: Array<{
-    message: string,
-    status: number
-  }>
+export type ErrorItem = {
+  message: string,
+  status: number
 };
+
+export type APIError = {
+  errors: ErrorItem|Array<ErrorItem>;
+};
+
+export type AuthError = {
+  error: {
+    type: string,
+    message: string,
+    details: string,
+  }
+};
+
+export type MeisterTaskAPIError = APIError|AuthError;
 
 export type AccessToken = {
   token_type: "Bearer"

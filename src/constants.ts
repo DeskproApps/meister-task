@@ -11,6 +11,8 @@ export const APP_PREFIX = "meister-task";
 
 export const ENTITY = "linkedMeisterTask";
 
+export const DEFAULT_ERROR = "There was an error!";
+
 export const ACCESS_TOKEN_PATH = "oauth2/access_token";
 
 export const placeholders = {

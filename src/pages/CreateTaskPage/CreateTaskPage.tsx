@@ -17,12 +17,12 @@ import {
   useDeskproLabel,
   useLinkedAutoComment,
 } from "../../hooks";
-import { getEntityMetadata } from "../../utils";
+import { getEntityMetadata, getError } from "../../utils";
 import { getTaskValues, getSectionId } from "../../components/TaskForm";
 import { CreateTask } from "../../components";
 import type { FC } from "react";
 import type { Maybe, TicketContext } from "../../types";
-import type { MeisterTaskAPIError, Label, Person, Project } from "../../services/meister-task/types";
+import type { Label, Person, Project } from "../../services/meister-task/types";
 import type { FormValidationSchema } from "../../components/TaskForm";
 
 const CreateTaskPage: FC = () => {
@@ -62,8 +62,7 @@ const CreateTaskPage: FC = () => {
       ]))
       .then(() => navigate("/home"))
       .catch((err) => {
-        const errors = (get(err, ["data", "errors"], []) as MeisterTaskAPIError["errors"] || [])
-          .map(({ message }) => message);
+        const errors = getError(err?.data);
 
         if (size(errors)) {
           setError(errors);
