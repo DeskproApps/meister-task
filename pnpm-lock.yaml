@@ -180,9 +180,6 @@ importers:
       resize-observer-polyfill:
         specifier: ^1.5.1
         version: 1.5.1
-      rimraf:
-        specifier: ^3.0.2
-        version: 3.0.2
       rollup-plugin-copy:
         specifier: 3.4.0
         version: 3.4.0
