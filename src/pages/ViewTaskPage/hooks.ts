@@ -74,7 +74,7 @@ const useTask: UseTask = (taskId) => {
   );
 
   const persons = useQueryWithClient(
-    [QueryKey.PERSONS_BY_PROJECT, get(task, ["data", "project_id"]) as string],
+    [QueryKey.PERSONS_BY_PROJECT, get(task, ["data", "project_id"]) as unknown as string],
     (client) => getProjectPersonsService(client, get(task, ["data", "project_id"]) as Project["id"]),
     { enabled: Boolean(get(task, ["data", "project_id"])) },
   );
