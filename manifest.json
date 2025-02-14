@@ -7,6 +7,7 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
+  "secrets": "qbu68tdx8Mhino33ya9WObq3WLyEGO1EKPr39v39+aAHLTPBAyoMLE8zOVp2VLhz5Fc5UhBsIkSdX6YV1iyyzj3bu7lN2ED73yaupf8A/WJmKnHEBSrXC0nAf2/VkTZ5t9LH9mINsJ5zE6QOVrljMB+ks5WYMddyjleRuFJsluLgydyqORACXxdVxr5j4bTM7Roa/LtAABuNEcGCl89ONqlazEmUaJVzB0N8HGS9hEYLde/mBahjrHdtv6my2E6EcbAyic4Bhi98HSysBWF2Tb0Sey8AWOleIbRZrZRqjuJIsKmqqkim7wAGgbGdFDpIGTC29O6gVDA5Hb3PwIzJTOqyN5vBBRV9wiwnCTtyKq3XY+HPW/sKB51Aq/NmNq/hGIiJSU7OGm2NpFwNGO/dYIJGTYOoEW4Xa6ary0lfBNN48ASZB3RC37tS3CpUQF/FJb7G8Fva3FmMf86AZYdFfeu0Vby//iMB83jlBAJgCVeUIXrRxLqbusdDcB4dNSLrhf9INSMrZm7pvcxoesTVGy1WypTAVpsoDX7FHozq7eMjazYRzHbMkx6QBv+c7Rh6VeBygk+K2gfv+V0oeAJWnP8Z0td+u69R666U5XFhlvLW7evMulrOTRoNeMHANrDwuUA+vtI7sXmGz7s1qdoblh3RzPLSohPY8A4Gk+0wQgk=",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/meistertask",
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "entityAssociations": {
@@ -17,18 +18,28 @@
     }
   },
   "settings": {
+    "use_deskpro_saas": {
+      "title": "One-Click Installation",
+      "type": "boolean",
+      "default": true,
+      "isRequired": false,
+      "isBackendOnly": false,
+      "order": 5
+    },
     "client_id": {
       "title": "Client ID",
       "type": "string",
-      "isRequired": true,
+      "isRequired": false,
       "isBackendOnly": false,
+      "condition": "settings.use_deskpro_saas != true",
       "order": 10
     },
     "client_secret": {
       "title": "Client Secret",
       "type": "string",
-      "isRequired": true,
+      "isRequired": false,
       "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true",
       "order": 20
     },
     "callback_url": {
@@ -37,6 +48,7 @@
       "options": { "entrypoint": "#/admin/callback" },
       "isRequired": false,
       "isBackendOnly": true,
+      "condition": "settings.use_deskpro_saas != true",
       "order": 30
     },
     "add_comment_when_linking": {
