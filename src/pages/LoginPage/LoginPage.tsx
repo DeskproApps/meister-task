@@ -1,11 +1,11 @@
-import { useDeskproElements } from "@deskpro/app-sdk";
-import { useSetTitle } from "../../hooks";
-import { useLogin } from "./hooks";
 import { Login } from "../../components";
+import { useDeskproElements } from "@deskpro/app-sdk";
+import { useLogin } from "./hooks";
+import { useSetTitle } from "../../hooks";
 import type { FC } from "react";
 
 const LoginPage: FC = () => {
-  const { poll, authUrl, isLoading } = useLogin();
+  const { onSignIn, authUrl, isLoading } = useLogin();
 
   useSetTitle("MeisterTask");
 
@@ -15,7 +15,7 @@ const LoginPage: FC = () => {
   });
 
   return (
-    <Login onLogin={poll} authUrl={authUrl} isLoading={isLoading} />
+    <Login onLogin={onSignIn} authUrl={authUrl} isLoading={isLoading} />
   );
 };
 
