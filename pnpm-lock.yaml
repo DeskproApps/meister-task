@@ -74,9 +74,6 @@ importers:
       ts-pattern:
         specifier: ^4.3.0
         version: 4.3.0
-      uuid:
-        specifier: ^9.0.1
-        version: 9.0.1
       zod:
         specifier: ^3.24.1
         version: 3.24.1
@@ -129,9 +126,6 @@ importers:
       '@types/testing-library__jest-dom':
         specifier: ^5.14.9
         version: 5.14.9
-      '@types/uuid':
-        specifier: ^9.0.8
-        version: 9.0.8
       '@typescript-eslint/eslint-plugin':
         specifier: 5.62.0
         version: 5.62.0(@typescript-eslint/parser@5.62.0(eslint@8.4.1)(typescript@5.7.3))(eslint@8.4.1)(typescript@5.7.3)
@@ -1217,9 +1211,6 @@ packages:
 
   '@types/tough-cookie@4.0.5':
     resolution: {integrity: sha512-/Ad8+nIOV7Rl++6f1BdKxFSMgmoqEoYbHRpPcx3JEfv8VRsQe9Z4mCXeJBzxs7mbHY/XOZZuXlRNfhpVPbs6ZA==}
-
-  '@types/uuid@9.0.8':
-    resolution: {integrity: sha512-jg+97EGIcY9AGHJJRaaPVgetKDsrTgbRjQ5Msgjh/DQKEFl0DtyRr/VCOyD1T2R1MNeWPK/u7JoGhlDZnKBAfA==}
 
   '@types/web@0.0.86':
     resolution: {integrity: sha512-d8mYKwcKvkMSlxlDovHyRD7GhNpe10ti4GaX4dR0lsQqk+2l9Y72PU2yPpYlRajQrpfuOWlgGqs8jpbSU9udpg==}
@@ -3228,10 +3219,6 @@ packages:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
     hasBin: true
 
-  uuid@9.0.1:
-    resolution: {integrity: sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==}
-    hasBin: true
-
   v8-compile-cache@2.4.0:
     resolution: {integrity: sha512-ocyWc3bAHBB/guyqJQVI5o4BZkPhznPYUG2ea80Gond/BgNWpap8TOmLSeeQG7bnh2KMISxskdADG59j7zruhw==}
 
@@ -4490,8 +4477,6 @@ snapshots:
       '@types/jest': 29.5.14
 
   '@types/tough-cookie@4.0.5': {}
-
-  '@types/uuid@9.0.8': {}
 
   '@types/web@0.0.86': {}
 
@@ -6796,8 +6781,6 @@ snapshots:
       react: 18.3.1
 
   uuid@8.3.2: {}
-
-  uuid@9.0.1: {}
 
   v8-compile-cache@2.4.0: {}
 
