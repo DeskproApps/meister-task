@@ -7,7 +7,7 @@
   "isSingleInstall": false,
   "hasDevMode": true,
   "serveUrl": "https://apps-cdn.deskpro-service.com/__name__/__version__",
-  "secrets": "qbu68tdx8Mhino33ya9WObq3WLyEGO1EKPr39v39+aAHLTPBAyoMLE8zOVp2VLhz5Fc5UhBsIkSdX6YV1iyyzj3bu7lN2ED73yaupf8A/WJmKnHEBSrXC0nAf2/VkTZ5t9LH9mINsJ5zE6QOVrljMB+ks5WYMddyjleRuFJsluLgydyqORACXxdVxr5j4bTM7Roa/LtAABuNEcGCl89ONqlazEmUaJVzB0N8HGS9hEYLde/mBahjrHdtv6my2E6EcbAyic4Bhi98HSysBWF2Tb0Sey8AWOleIbRZrZRqjuJIsKmqqkim7wAGgbGdFDpIGTC29O6gVDA5Hb3PwIzJTOqyN5vBBRV9wiwnCTtyKq3XY+HPW/sKB51Aq/NmNq/hGIiJSU7OGm2NpFwNGO/dYIJGTYOoEW4Xa6ary0lfBNN48ASZB3RC37tS3CpUQF/FJb7G8Fva3FmMf86AZYdFfeu0Vby//iMB83jlBAJgCVeUIXrRxLqbusdDcB4dNSLrhf9INSMrZm7pvcxoesTVGy1WypTAVpsoDX7FHozq7eMjazYRzHbMkx6QBv+c7Rh6VeBygk+K2gfv+V0oeAJWnP8Z0td+u69R666U5XFhlvLW7evMulrOTRoNeMHANrDwuUA+vtI7sXmGz7s1qdoblh3RzPLSohPY8A4Gk+0wQgk=",
+  "secrets": "Eb6RxzXsr6cn1ZLnpHDnHmXr6r+6pvzEZQASkAN4ZSk2pcWiwxYqcdFwdrDSf7ZVozMAgjnWiyc/7PNtLzg7U6TaGh8Yc/IEk/5fPfj7zD2dWepC2WTFODWtg4E2lFdp6A/pOBNC+M4RFGtrGp9zNzm+ezRw/KfxC25GiNeMk9X08gyp3jIgNNVCOgm4j99R7UQpmU11f2btEYK1306muu4vuPGijDGdt0mzgnRVqp2SibunIa5Z+Zf/MZDumRmyTF9V5o1QdjeH/Ljy8m7z56vBGAlNPxBYRkpbNFom1oNO9tK9VmdoDlXVQAM+hswk5iLDWM3KqTG4pgArvjXhwMFY13GnCkROuJ6ikwA7G88YKnlFrF8g5Yw+YQNkst5W4BsIhQHLp3HlCDv3SBZr1vS3tVJ1Vzb0jyqSz/yxvn7hJuBs1C8rcpTiK23jJatjgr1Rv7hWARAhTzO3NjEeJE9/+yuYgT+TyPK4yVM02udhw4fQLBwJ3b2BlhJXqHEBfBeBgDGTKr+AF51VYA6XV2kyd4KydXqGslPPbJbsjfH2zEiEE+gCRAUEj6PyhNTtROMGy3lQHxINxQcxRZ9mutqgHkZEP0mNTfAiehhEQHOkEyZu9Ft+oYZsU84chapzGM/F1eI6eK1VKBunDkulZKB5H2dZUFoI0CTAs+J8UZY=",
   "appStoreUrl": "https://www.deskpro.com/product-embed/apps/meistertask",
   "targets": [{ "target": "ticket_sidebar", "entrypoint": "index.html" }],
   "entityAssociations": {
