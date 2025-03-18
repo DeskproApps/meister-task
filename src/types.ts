@@ -37,7 +37,7 @@ export type Settings = {
   default_comment_on_ticket_reply?: boolean,
   default_comment_on_ticket_note?: boolean,
   add_deskpro_label?: boolean,
-  use_deskpro_saas?: boolean,
+  use_advanced_connect?: boolean,
 };
 
 export type TicketData = {
