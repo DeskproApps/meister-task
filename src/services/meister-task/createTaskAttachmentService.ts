@@ -1,17 +1,16 @@
 import { baseRequest } from "./baseRequest";
-import type { IDeskproClient } from "@deskpro/app-sdk";
-import type { Task, Attachment } from "./types";
+import { IDeskproClient } from "@deskpro/app-sdk";
+import type { Attachment, Task, } from "./types";
 
-const createTaskAttachmentService = (
-  client: IDeskproClient,
-  taskId: Task["id"],
-  data: FormData,
-) => {
-  return baseRequest<Attachment>(client, {
+export async function createTaskAttachmentService(client: IDeskproClient, taskId: Task["id"], data: FormData,) {
+
+  return await baseRequest<Attachment>(client, {
     url: `/tasks/${taskId}/attachments`,
     method: "POST",
     data,
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
   });
-};
+}
 
-export { createTaskAttachmentService };

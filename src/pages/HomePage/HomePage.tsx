@@ -20,8 +20,9 @@ const HomePage: FC = () => {
   useSetTitle("MeisterTask");
   useSetBadgeCount(tasks);
 
-  useDeskproElements(({ registerElement, clearElements }) => {
+  useDeskproElements(({ registerElement, clearElements, deRegisterElement }) => {
     clearElements();
+    deRegisterElement("edit")
     registerElement("refresh", { type: "refresh_button" });
     registerElement("plus", {
       type: "plus_button",
