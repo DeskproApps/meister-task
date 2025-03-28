@@ -83,7 +83,6 @@ const Attach: FC<Props> = ({ id, onFiles, existing }) => {
           onChange={(e) => upload(e, name)}
           ref={idx === fieldIdx ? fileRef : null}
           style={{ display: "none" }}
-          accept=".png, .jpg, .jpeg, .gif, .tiff, .bmp, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .txt, .csv, .zip, .rar, .mp3, .mp4, .mov"
         />
       ))}
       <Stack gap={3} vertical>
