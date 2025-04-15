@@ -36,7 +36,7 @@
     "react-time-ago": "^7.3.3",
     "showdown": "^2.1.0",
     "styled-components": "^6.1.15",
-    "ts-pattern": "^4.3.0",
+    "ts-pattern": "^5.7.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
