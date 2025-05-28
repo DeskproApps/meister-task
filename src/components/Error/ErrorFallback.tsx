@@ -4,14 +4,9 @@ import { getError } from "../../utils";
 import { MeisterTaskError } from "../../services/meister-task";
 import { DEFAULT_ERROR } from "../../constants";
 import { Container, ErrorBlock } from "../common";
-import type { FC } from "react";
-import type { FallbackProps } from "react-error-boundary";
+import { FallbackRender } from "@sentry/react";
 
-type Props = Omit<FallbackProps, "error"> & {
-  error: Error,
-};
-
-const ErrorFallback: FC<Props> = ({error}) => {
+const ErrorFallback: FallbackRender = ({error}) => {
   let message = DEFAULT_ERROR;
   const button = null;
 
