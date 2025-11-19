@@ -20,16 +20,16 @@ export const placeholders = {
   ACCESS_TOKEN: `[user[${ACCESS_TOKEN_PATH}]]`,
   CLIENT_ID: "__client_id__",
   CLIENT_SECRET: "__client_secret__",
-};
+} as const;
 
 /** MeisterTask */
 export const BASE_URL = "https://www.meistertask.com/api";
 export const AUTH_URL = "https://www.mindmeister.com/oauth2";
 export const HTML_URL = "https://www.meistertask.com/app";
 
-export const SCOPES = ["userinfo.email", "userinfo.profile", "meistertask"];
+export const SCOPES = ["userinfo.email", "userinfo.profile", "meistertask"] as const;
 
 export const DESKPRO_LABEL = {
   name: "Deskpro",
   color: "00aaff",
-};
+} as const;

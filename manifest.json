@@ -92,12 +92,21 @@
       {
         "url": "https://www.mindmeister.com/oauth2/.*",
         "methods": ["POST"],
-        "timeout": 20
+        "timeout": 20,
+        "settingsInjection": {
+          "client_id": {
+            "body": ["client_id"]
+          },
+          "client_secret": {
+            "body": ["client_secret"]
+          }
+        }
       },
       {
         "url": "https://www.meistertask.com/api/.*",
         "methods": ["GET", "POST", "PUT", "DELETE"],
-        "timeout": 20
+        "timeout": 20,
+        "settingsInjection": {}
       }
     ]
   }
